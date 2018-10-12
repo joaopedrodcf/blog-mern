@@ -1,0 +1,8 @@
+{
+    "extends": [
+        "joaopedrodcf"
+    ],"rules": {
+        "import/order": ["error", {"groups": [ "external", "index", "sibling", "parent", "internal","builtin"]}],
+        "react/require-default-props": "warn"
+    }
+}

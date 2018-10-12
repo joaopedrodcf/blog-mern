@@ -1,0 +1,29 @@
+{
+    "name": "blog-mern",
+    "version": "0.1.0",
+    "description": "A MERN blog hosted on heroku",
+    "license": "MIT",
+    "author": {
+        "name": "João Ferreira",
+        "email": "joaoferr93@gmail.com",
+        "url": "https://twitter.com/Joaopedrodcf"
+    },
+    "main": "index.js",
+    "scripts": {
+        "build-client": "cd client && yarn build",
+        "client": "cd client && yarn",
+        "heroku-postbuild": "yarn build-client",
+        "install": "(yarn client) && (yarn server)",
+        "server": "cd server && yarn",
+        "start": "concurrently \"yarn start-client\" \"yarn start-server\"",
+        "start-client": "cd client && yarn start",
+        "start-server": "cd server && yarn start",
+        "start:prod": "cd server && yarn start:prod"
+    },
+    "dependencies": {
+        "concurrently": "^4.0.1"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    }
+}
