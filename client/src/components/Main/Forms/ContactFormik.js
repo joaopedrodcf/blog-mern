@@ -73,7 +73,7 @@ const ContactFormik = () => (
             }) => (
                 <Form onSubmit={handleSubmit}>
                     <WrapperTitle>
-                        <h3>Contact us</h3>
+                        <h5>Contact us</h5>
                     </WrapperTitle>
                     <Label htmlFor="name">
                         Name

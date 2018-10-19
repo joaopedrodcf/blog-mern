@@ -96,7 +96,7 @@ class CreatePostFormik extends Component {
                     }) => (
                         <Form onSubmit={handleSubmit}>
                             <WrapperTitle>
-                                <h3>Create your post</h3>
+                                <h5>Create your post</h5>
                             </WrapperTitle>
                             <Label htmlFor="title">
                                 Title

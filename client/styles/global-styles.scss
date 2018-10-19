@@ -1,0 +1,157 @@
+
+
+
+$font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+// use with white text only
+$primary: #1b3eb3;
+$primary-dark: #001982;
+$primary-light: #5f68e6;
+$secondary-dark: #7f6300;
+
+// use with black text only
+$secondary: #b38f1b;
+$secondary-light: #e8c04f;
+
+$white:#FFFFFF;
+$black: #000000;
+
+$gray-50: #FAFAFA;
+$gray-300: #E0E0E0;
+$gray-500: #9E9E9E;
+$gray-500: #616161;
+$gray-900: #212121;
+
+$typography-10: 1rem;
+$typography-12: 1.2rem;
+$typography-14: 1.4rem;
+$typography-16: 1.6rem;
+$typography-20: 2rem;
+$typography-24: 2.4rem;
+$typography-34: 3.4rem;
+$typography-48: 4.8rem;
+$typography-60: 6.0rem;
+$typography-96: 9.6rem;
+
+$space-xs: 0.2rem;
+$space-sm: 0.4rem;
+$space-md: 0.8rem;
+$space-lg: 1.6rem;
+$space-xl: 3.2rem;
+$space-xxl: 6.4rem;
+
+$space-4: 0.4rem;
+$space-8: 0.8rem;
+$space-12: 1.2rem;
+$space-16: 1.6rem;
+$space-24: 2.4rem;
+$space-28: 2.8rem;
+$space-32: 3.2rem;
+$space-48: 4.8rem;
+$space-56: 5.6rem;
+$space-64: 5.6rem;
+$space-88: 8.8rem;
+
+/* Card, search bar (resting elevation) */
+$box-shadow-1dp: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+
+/* Button */
+$box-shadow-2dp: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+
+/* Search bar scroll state */
+$box-shadow-3dp: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+
+/* Navbar */
+$box-shadow-4dp: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+
+/* Floating action button */
+$box-shadow-6dp: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
+
+/* Button pressed */
+$box-shadow-8dp: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+
+/* Card picked up */
+$box-shadow-9dp: 0 9px 12px 1px rgba(0,0,0,0.14), 0 3px 16px 2px rgba(0,0,0,0.12), 0 5px 6px -3px rgba(0,0,0,0.20);
+
+/* Menus, sub menus, footer, bottom navigation, floating action button pressed */
+$box-shadow-12dp: 0 12px 17px 2px rgba(0,0,0,0.14), 0 5px 22px 4px rgba(0,0,0,0.12), 0 7px 8px -4px rgba(0,0,0,0.20);
+
+/* Sidebar */
+$box-shadow-16dp: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.20);
+
+/* Modal */
+$box-shadow-24dp: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.20);
+
+
+// default rules
+* {
+    font-family: $font-family;
+    //font-size: 62.5%;
+}
+
+h1{
+    letter-spacing: -1.5/16 + 0rem;
+    font-size: $typography-96;
+}
+
+h2{
+    letter-spacing: -0.5/16 + 0rem;
+    font-size: $typography-60;
+}
+
+h3{
+    letter-spacing: 0;
+    font-size: $typography-48;
+}
+
+h4{
+    letter-spacing: 0.25/16 + 0rem;
+    font-size: $typography-34;
+}
+
+h5{
+    letter-spacing: 0;
+    font-size: $typography-24;
+}
+
+h6{
+    letter-spacing: 0.15/16 + 0rem;
+    font-size: $typography-20;
+}
+
+.typographySubtitle1{
+    letter-spacing: 0.15/16 + 0rem;
+    font-size: $typography-16;
+}
+
+.typographySubtitle2{
+    letter-spacing: 0.1/16 + 0rem;
+    font-size: $typography-14;
+}
+
+.typographyBody1{
+    letter-spacing: 0.5/16 + 0rem;
+    font-size: $typography-16;
+}
+
+.typographyBody2{
+    letter-spacing: 0.25/16 + 0rem;
+    font-size: $typography-14;
+}
+
+.typographyButton{
+    letter-spacing: 0.75/16 + 0rem;
+    text-transform: uppercase;
+    font-size: $typography-14;
+}
+
+.typographyCaption{
+    letter-spacing: 0.4/16 + 0rem;
+    font-size: $typography-12;
+}
+
+.typographyOverline{
+    letter-spacing: 1.5/16 + 0rem;
+    text-transform: uppercase;
+    font-size: $typography-10;
+}

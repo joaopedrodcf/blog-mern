@@ -1,12 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
-
 import {
     Label,
     ErrorLabel,
     Form,
-    Button,
     WrapperTitle,
     Wrapper,
     Figure,
@@ -14,6 +12,8 @@ import {
     WrapperButton,
     Alert
 } from './style';
+
+import Button from '../../Button';
 
 function handleRegister(values, register, { resetForm }) {
     const { email, password } = values;
@@ -62,7 +62,7 @@ const RegisterFormik = ({ register, errorMessage }) => (
             }) => (
                 <Form onSubmit={handleSubmit}>
                     <WrapperTitle>
-                        <h3>Register</h3>
+                        <h5>Register</h5>
                     </WrapperTitle>
 
                     <Label htmlFor="email">
@@ -104,15 +104,14 @@ const RegisterFormik = ({ register, errorMessage }) => (
 
                     <WrapperButton>
                         <Button
+                            label="Register"
                             type="submit"
                             disabled={
                                 (Object.keys(errors).length !== 0 &&
                                     !isSubmitting) ||
                                 !dirty
                             }
-                        >
-                            Register
-                        </Button>
+                        />
                     </WrapperButton>
                 </Form>
             )}

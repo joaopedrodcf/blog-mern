@@ -59,7 +59,7 @@ const CommentFormik = ({ postId }) => (
             }) => (
                 <Form onSubmit={handleSubmit}>
                     <WrapperTitle>
-                        <h3>Comment</h3>
+                        <h5>Comment</h5>
                     </WrapperTitle>
                     <Label htmlFor="text">
                         Text
