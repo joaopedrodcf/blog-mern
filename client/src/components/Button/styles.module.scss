@@ -7,9 +7,9 @@
     border: none;
     box-shadow: $box-shadow-2dp;
     border-radius: $space-4;
-    background-color: $primary;
-    padding: $space-12 $space-24; 
-    color: $white;
+    padding: $space-12 $space-24;
+    background-color: $secondary;
+    color: $black;
 
     // fix chrome
     outline:none;
@@ -19,11 +19,23 @@
 
 .button:hover,
 .button:active{
-    background-color: $primary-dark;
+    background-color: $secondary-dark;
     box-shadow: $box-shadow-8dp;
 }
 
 .button:disabled{
     box-shadow: none;
     // background-color fade
+}
+
+.small{
+    padding: $space-12 $space-24; 
+}
+
+.medium{
+    padding: $space-16 $space-28;
+}
+
+.large{
+    padding: $space-24 $space-32;
 }

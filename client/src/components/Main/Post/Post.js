@@ -4,7 +4,6 @@ import { PropTypes } from 'prop-types';
 import {
     Container,
     Article,
-    Button,
     Figure,
     LinkPost,
     FigureContainer,
@@ -12,6 +11,7 @@ import {
     SubHeader,
     Description
 } from './style';
+import Button from '../../Button';
 
 const formatDate = date => new Date(date).toDateString();
 
@@ -34,7 +34,7 @@ const Post = ({ _id, title, date, description, image, author }) => (
         </FigureContainer>
 
         <LinkPost to={`/post/${_id}`}>
-            <Button>Continue reading</Button>
+            <Button label="Continue reading" size="medium" />
         </LinkPost>
     </Container>
 );

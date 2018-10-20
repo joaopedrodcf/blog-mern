@@ -7,7 +7,6 @@ import {
     Form,
     WrapperTitle,
     Wrapper,
-    Figure,
     Input,
     WrapperButton,
     Alert

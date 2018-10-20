@@ -5,17 +5,17 @@ import {
     Label,
     ErrorLabel,
     Form,
-    Button,
     Image,
     LabelFile,
     WrapperTitle,
     Wrapper,
-    Figure,
     Input,
     TextArea,
     WrapperButton,
     Alert
 } from './style';
+import Button from '../../Button';
+
 import { createPostService } from '../../../services/api';
 
 function createPost(values, { resetForm }) {
@@ -178,9 +178,8 @@ class CreatePostFormik extends Component {
                                             !isSubmitting) ||
                                         !dirty
                                     }
-                                >
-                                    Create post
-                                </Button>
+                                    label="Create post"
+                                />
                             </WrapperButton>
                         </Form>
                     )}

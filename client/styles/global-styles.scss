@@ -4,23 +4,28 @@
 $font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
 // use with white text only
-$primary: #1b3eb3;
-$primary-dark: #001982;
-$primary-light: #5f68e6;
-$secondary-dark: #7f6300;
+$primary: #01579b;
+$primary-light: #4f83cc;
+$primary-dark: #002f6c;
 
 // use with black text only
-$secondary: #b38f1b;
-$secondary-light: #e8c04f;
+$secondary: #fdd835;
+$secondary-light: #ffff6b;
+$secondary-dark: #c6a700;
 
 $white:#FFFFFF;
 $black: #000000;
 
+$purple: #6A1B9A;
+$purple-dark: #38006b;
+
 $gray-50: #FAFAFA;
 $gray-300: #E0E0E0;
 $gray-500: #9E9E9E;
-$gray-500: #616161;
+$gray-700: #616161;
 $gray-900: #212121;
+
+$red:#AB000D; 
 
 $typography-10: 1rem;
 $typography-12: 1.2rem;
@@ -52,6 +57,10 @@ $space-56: 5.6rem;
 $space-64: 5.6rem;
 $space-88: 8.8rem;
 
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 600;
+
 /* Card, search bar (resting elevation) */
 $box-shadow-1dp: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
 
@@ -82,76 +91,103 @@ $box-shadow-16dp: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.
 /* Modal */
 $box-shadow-24dp: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.20);
 
+body,
+html,
+#root {
+    height: 100%;
+    font-size: 62.5%;
+}
 
 // default rules
 * {
     font-family: $font-family;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     //font-size: 62.5%;
 }
 
 h1{
     letter-spacing: -1.5/16 + 0rem;
     font-size: $typography-96;
+    font-weight: $font-weight-light;
 }
 
 h2{
     letter-spacing: -0.5/16 + 0rem;
     font-size: $typography-60;
+    font-weight: $font-weight-light;
 }
 
 h3{
     letter-spacing: 0;
     font-size: $typography-48;
+    font-weight: $font-weight-regular;
 }
 
 h4{
     letter-spacing: 0.25/16 + 0rem;
     font-size: $typography-34;
+    font-weight: $font-weight-regular;
 }
 
 h5{
     letter-spacing: 0;
     font-size: $typography-24;
+    font-weight: $font-weight-regular;
 }
 
 h6{
     letter-spacing: 0.15/16 + 0rem;
     font-size: $typography-20;
+    font-weight: $font-weight-medium;
 }
 
 .typographySubtitle1{
     letter-spacing: 0.15/16 + 0rem;
     font-size: $typography-16;
+    font-weight: $font-weight-regular;
 }
 
 .typographySubtitle2{
     letter-spacing: 0.1/16 + 0rem;
     font-size: $typography-14;
+    font-weight: $font-weight-regular;
 }
 
 .typographyBody1{
     letter-spacing: 0.5/16 + 0rem;
     font-size: $typography-16;
+    font-weight: $font-weight-medium;
 }
 
 .typographyBody2{
     letter-spacing: 0.25/16 + 0rem;
     font-size: $typography-14;
+    font-weight: $font-weight-regular;
 }
 
 .typographyButton{
     letter-spacing: 0.75/16 + 0rem;
     text-transform: uppercase;
     font-size: $typography-14;
+    font-weight: $font-weight-medium;
 }
 
 .typographyCaption{
     letter-spacing: 0.4/16 + 0rem;
     font-size: $typography-12;
+    font-weight: $font-weight-regular;
 }
 
 .typographyOverline{
     letter-spacing: 1.5/16 + 0rem;
     text-transform: uppercase;
     font-size: $typography-10;
+    font-weight: $font-weight-regular;
+}
+
+.reset{
+    padding: 0 !important;
+    margin: 0 !important;
 }

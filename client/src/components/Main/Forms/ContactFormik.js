@@ -1,20 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
 
-import {
-    Label,
-    ErrorLabel,
-    Form,
-    Button,
-    WrapperTitle,
-    Wrapper,
-    Figure,
-    Input,
-    WrapperButton,
-    TextArea,
-    Alert
-} from './style';
+import classnames from 'classnames';
+import styles from './styles.module.scss';
 import { contactService } from '../../../services/api';
+import Button from '../../Button';
 
 function sendMessage(values, { resetForm }) {
     const { name, email, message } = values;
@@ -52,7 +42,7 @@ function validate(values) {
 }
 
 const ContactFormik = () => (
-    <Wrapper>
+    <div className={styles.wrapper}>
         <Formik
             initialValues={{
                 name: '',
@@ -71,59 +61,144 @@ const ContactFormik = () => (
                 isSubmitting,
                 dirty
             }) => (
-                <Form onSubmit={handleSubmit}>
-                    <WrapperTitle>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.formTitle}>
                         <h5>Contact us</h5>
-                    </WrapperTitle>
-                    <Label htmlFor="name">
-                        Name
-                        <Input
+                    </div>
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.name && errors.name && values.name !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
                             type="text"
                             name="name"
-                            placeholder="Name"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.name}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.name)
+                            )}
                         />
-                    </Label>
-                    <ErrorLabel>
-                        {touched.name &&
-                            errors.name && <div>{errors.name}</div>}
-                    </ErrorLabel>
-
-                    <Label htmlFor="email">
-                        Email
-                        <Input
+                        <label
+                            htmlFor="name"
+                            className={classnames(
+                                styles.label,
+                                values.name !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Name
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            {touched.name && errors.name ? (
+                                <>{errors.name}</>
+                            ) : (
+                                'Required'
+                            )}
+                        </span>
+                    </div>
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.email && errors.email && values.email !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
                             type="email"
                             name="email"
-                            placeholder="Email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.email)
+                            )}
                         />
-                    </Label>
-                    <ErrorLabel>
-                        {touched.email &&
-                            errors.email && <div>{errors.email}</div>}
-                    </ErrorLabel>
-
-                    <Label htmlFor="message">
-                        Message
-                        <TextArea
+                        <label
+                            htmlFor="email"
+                            className={classnames(
+                                styles.label,
+                                values.email !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Email
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            {touched.email && errors.email ? (
+                                <>{errors.email}</>
+                            ) : (
+                                'Required'
+                            )}
+                        </span>
+                    </div>
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.message &&
+                            errors.message &&
+                            values.message !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
                             name="message"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.message}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.message)
+                            )}
                         />
-                    </Label>
-                    <ErrorLabel>
-                        {touched.message &&
-                            errors.message && <div>{errors.message}</div>}
-                    </ErrorLabel>
-
-                    {isSubmitting && <Alert error>Sent with success</Alert>}
-
-                    <WrapperButton>
+                        <label
+                            htmlFor="message"
+                            className={classnames(
+                                styles.label,
+                                values.message !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Message
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            {touched.message && errors.message ? (
+                                <>{errors.message}</>
+                            ) : (
+                                'Required'
+                            )}
+                        </span>
+                    </div>
+                    {isSubmitting && (
+                        <button type="button">Sent with success</button>
+                    )}
+                    <div className={styles.formFooter}>
                         <Button
                             type="submit"
                             disabled={
@@ -131,14 +206,13 @@ const ContactFormik = () => (
                                     !isSubmitting) ||
                                 !dirty
                             }
-                        >
-                            Send message
-                        </Button>
-                    </WrapperButton>
-                </Form>
+                            label="Send message"
+                        />
+                    </div>
+                </form>
             )}
         />
-    </Wrapper>
+    </div>
 );
 
 export default ContactFormik;

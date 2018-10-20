@@ -1,0 +1,78 @@
+@import "../../../../styles/global-styles.scss";
+
+.wrapper{
+    margin: $space-24 0;
+    padding: $space-12 $space-12;
+}
+
+.formTitle{
+    margin-bottom: $space-24;
+    text-align: center;
+}
+
+.formFooter{
+    margin-top: $space-24;
+    text-align: right;
+}
+
+.formGroup{
+    padding: $space-24 0;
+    position: relative;
+}
+
+.label{
+    position: absolute;
+    top:40px;
+    left:$space-8;
+    background-color: $white;
+    padding: 0 $space-4;
+    color: $gray-500;
+    font-size: $typography-16;
+    transition: all 0.3s ease;
+}
+
+.input{
+    border: 0.1rem solid $gray-500;
+    border-radius: $space-4;
+    // fix for chrome
+    outline:none;
+    padding: $space-12;
+    width: 100%;
+    transition: border 0.3s ease;
+}
+
+/*
+.input:invalid {
+    border: 0.2rem solid $red;
+}
+*/
+
+.input:hover {
+    border: 0.1rem solid $black;
+}
+
+.input:focus {
+    border: 0.2rem solid $primary;
+}
+
+.help{
+    font-size: $typography-12;
+    color: $gray-500;
+    margin: 0 $space-12;
+}
+
+.input:focus + label , .input:valid + label, .labelTop{
+    top:$space-16;
+    left:$space-8;
+    font-size: $typography-12;
+    color: $primary;
+}
+
+
+.error > .input{
+    border: 0.2rem solid $red;
+}
+
+.error > label{
+    color: $red;
+}

@@ -1,0 +1,59 @@
+@import "../../../styles/global-styles.scss";
+
+.card{
+    box-shadow: $box-shadow-2dp;
+    border-radius: $space-4;
+    margin: $space-24 0;
+}
+
+.cardTitle{
+    padding: $space-12 $space-12;
+}
+
+.cardBy{
+    color:$gray-500;
+}
+
+.cardText{
+    color:$gray-900;
+    padding: $space-12 $space-12;
+}
+
+.cardImage{
+    img {
+        height: 32.0rem; 
+        width: 100%; 
+    }
+}
+
+.cardOptions{
+    padding: $space-12 $space-12;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.optionsLeft{
+    display: flex;
+    flex-direction: row;
+}
+
+.cardButtons{
+    display: flex;
+    align-items: center;
+}
+
+.heart{
+    color: $red;
+    font-size: $typography-24;
+    padding: 0 $space-12;
+}
+
+.heart:hover{
+    color: $red;
+}
+
+.shareAlt{
+    color: $gray-500;
+    font-size: $typography-24;
+    padding-left: $space-12;
+}

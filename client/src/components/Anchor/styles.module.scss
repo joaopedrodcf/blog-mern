@@ -1,0 +1,35 @@
+@import "../../../styles/global-styles.scss";
+
+.anchor {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0 $space-12;
+}
+
+.white {
+    color: $white;
+    :hover{
+        color: $secondary;
+    }
+}
+
+.yellow {
+    color: $secondary;
+    :hover{
+        color: $secondary-dark;
+    }
+}
+
+.blue {
+    color: $primary;
+    :hover{
+        color: $primary-dark;
+    }
+}
+
+.purple {
+    color: $purple;
+    :hover{
+        color: $purple-dark;
+    }
+}

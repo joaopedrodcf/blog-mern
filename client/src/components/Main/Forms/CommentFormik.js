@@ -6,13 +6,13 @@ import {
     Label,
     ErrorLabel,
     Form,
-    Button,
     WrapperTitle,
     Wrapper,
     Input,
     WrapperButton
 } from './style';
 import { createCommentService } from '../../../services/api';
+import Button from '../../Button';
 
 function createComment(values, postId, { resetForm }) {
     const { text } = values;
@@ -85,9 +85,8 @@ const CommentFormik = ({ postId }) => (
                                     !isSubmitting) ||
                                 !dirty
                             }
-                        >
-                            Create comment
-                        </Button>
+                            label="Create comment"
+                        />
                     </WrapperButton>
                 </Form>
             )}

@@ -8,13 +8,18 @@ import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faWindowClose, faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+    faWindowClose,
+    faBars,
+    faHeart,
+    faShareAlt
+} from '@fortawesome/free-solid-svg-icons';
 
 import Routes from './Routes';
 import reducers from './reducers';
 import './globalStyle';
 
-library.add(fab, faBars, faWindowClose);
+library.add(fab, faBars, faWindowClose, faHeart, faShareAlt);
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('token'),

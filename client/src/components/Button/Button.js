@@ -4,11 +4,20 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
-const Button = ({ type, size, label, onClick }) => (
+export const SIZES = {
+    SMALL: 'small',
+    MEDIUM: 'medium',
+    LARGE: 'large'
+};
+
+const Button = ({ buttonSize, label, rest }) => (
     <button
-        type={type}
-        className={classnames(styles.button, styles.typographyButton)}
-        onClick={onClick}
+        className={classnames(
+            styles.button,
+            styles[buttonSize || SIZES.MEDIUM],
+            styles.typographyButton
+        )}
+        {...rest}
     >
         {label}
     </button>
@@ -16,13 +25,14 @@ const Button = ({ type, size, label, onClick }) => (
 
 Button.propTypes = {
     type: PropTypes.string,
-    size: PropTypes.string.isRequired,
+    disabled: PropTypes.string,
+    buttonSize: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 };
 
 Button.defaultProps = {
     type: 'button',
-    onClick: () => {}
+    disabled: ''
 };
 export default Button;

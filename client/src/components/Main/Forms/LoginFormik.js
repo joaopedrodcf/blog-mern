@@ -6,14 +6,14 @@ import {
     Label,
     ErrorLabel,
     Form,
-    Button,
     WrapperTitle,
     Wrapper,
-    Figure,
     Input,
     WrapperButton,
     Alert
 } from './style';
+
+import Button from '../../Button';
 
 function handleLogin(values, login, { resetForm }) {
     const { email, password } = values;
@@ -108,9 +108,8 @@ const LoginFormik = ({ login, errorMessage }) => (
                                     !isSubmitting) ||
                                 !dirty
                             }
-                        >
-                            Login
-                        </Button>
+                            label="Login"
+                        />
                     </WrapperButton>
                 </Form>
             )}

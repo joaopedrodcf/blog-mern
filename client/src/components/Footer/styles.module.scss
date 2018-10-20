@@ -1,0 +1,12 @@
+@import "../../../styles/global-styles.scss";
+
+footer{
+    grid-area: footer;
+    background-color: $primary;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $box-shadow-12dp;
+}

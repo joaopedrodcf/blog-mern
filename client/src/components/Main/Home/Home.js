@@ -4,6 +4,7 @@ import React from 'react';
 import { ContainerPages, PaginationButton } from './style';
 import Post from '../Post/Post';
 import { getPostsService } from '../../../services/api';
+import Card from '../../Card';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -54,7 +55,7 @@ export default class Home extends React.Component {
         return (
             <div>
                 {posts.map(post => (
-                    <Post key={post._id} {...post} />
+                    <Card key={post._id} {...post} />
                 ))}
                 {totalPages !== 0 && (
                     <ContainerPages>
