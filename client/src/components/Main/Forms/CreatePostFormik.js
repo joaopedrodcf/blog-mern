@@ -1,19 +1,10 @@
+/* eslint-disable class-methods-use-this */
+
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 
-import {
-    Label,
-    ErrorLabel,
-    Form,
-    Image,
-    LabelFile,
-    WrapperTitle,
-    Wrapper,
-    Input,
-    TextArea,
-    WrapperButton,
-    Alert
-} from './style';
+import classnames from 'classnames';
+import styles from './styles.module.scss';
 import Button from '../../Button';
 
 import { createPostService } from '../../../services/api';
@@ -62,6 +53,8 @@ class CreatePostFormik extends Component {
         this.state = {
             file: null
         };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleFileInput = this.handleFileInput.bind(this);
     }
 
     imagePreview(event) {
@@ -70,10 +63,24 @@ class CreatePostFormik extends Component {
         });
     }
 
+    handleClick() {
+        const fileInput = document.getElementById('fileInput');
+
+        if (fileInput) {
+            fileInput.click();
+        }
+    }
+
+    handleFileInput(event) {
+        if (event.target.files[0] !== undefined) {
+            this.setState({ file: event.target.files[0].name });
+        }
+    }
+
     render() {
         const { file } = this.state;
         return (
-            <Wrapper>
+            <div className={styles.wrapper}>
                 <Formik
                     initialValues={{
                         title: '',
@@ -91,100 +98,197 @@ class CreatePostFormik extends Component {
                         handleBlur,
                         handleSubmit,
                         isSubmitting,
-                        dirty,
                         setFieldValue
                     }) => (
-                        <Form onSubmit={handleSubmit}>
-                            <WrapperTitle>
-                                <h5>Create your post</h5>
-                            </WrapperTitle>
-                            <Label htmlFor="title">
-                                Title
-                                <Input
+                        <form onSubmit={handleSubmit}>
+                            <div className={styles.formTitle}>
+                                <h5>Create post</h5>
+                            </div>
+                            <div
+                                className={classnames(
+                                    styles.formGroup,
+                                    touched.title &&
+                                    errors.title &&
+                                    values.title !== ''
+                                        ? styles.error
+                                        : ''
+                                )}
+                            >
+                                <input
+                                    id="title"
                                     type="text"
                                     name="title"
-                                    placeholder="Title"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.title}
+                                    required
+                                    className={classnames(
+                                        styles.input,
+                                        (styles.inputActivated: values.title)
+                                    )}
                                 />
-                            </Label>
-                            <ErrorLabel>
-                                {' '}
-                                {touched.title &&
-                                    errors.title && <div>{errors.title}</div>}
-                            </ErrorLabel>
+                                <label
+                                    htmlFor="title"
+                                    className={classnames(
+                                        styles.label,
+                                        values.title !== '' && styles.labelTop,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Title
+                                </label>
+                                <span
+                                    className={classnames(
+                                        styles.help,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Required
+                                </span>
+                            </div>
 
-                            <Label htmlFor="description">
-                                Description
-                                <TextArea
+                            <div
+                                className={classnames(
+                                    styles.formGroup,
+                                    touched.description &&
+                                    errors.description &&
+                                    values.description !== ''
+                                        ? styles.error
+                                        : ''
+                                )}
+                            >
+                                <input
+                                    id="description"
+                                    type="text"
                                     name="description"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
-                                />
-                            </Label>
-                            <ErrorLabel>
-                                {' '}
-                                {touched.description &&
-                                    errors.description && (
-                                        <div>{errors.description}</div>
+                                    required
+                                    className={classnames(
+                                        styles.input,
+                                        (styles.inputActivated: values.description)
                                     )}
-                            </ErrorLabel>
+                                />
+                                <label
+                                    htmlFor="description"
+                                    className={classnames(
+                                        styles.label,
+                                        values.description !== '' &&
+                                            styles.labelTop,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Description
+                                </label>
+                                <span
+                                    className={classnames(
+                                        styles.help,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Required
+                                </span>
+                            </div>
 
-                            <Label htmlFor="text">
-                                Text
-                                <TextArea
+                            <div
+                                className={classnames(
+                                    styles.formGroup,
+                                    touched.text &&
+                                    errors.text &&
+                                    values.text !== ''
+                                        ? styles.error
+                                        : ''
+                                )}
+                            >
+                                <input
+                                    id="text"
+                                    type="text"
                                     name="text"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.text}
+                                    required
+                                    className={classnames(
+                                        styles.input,
+                                        (styles.inputActivated: values.text)
+                                    )}
                                 />
-                            </Label>
-                            <ErrorLabel>
-                                {' '}
-                                {touched.text &&
-                                    errors.text && <div>{errors.text}</div>}
-                            </ErrorLabel>
+                                <label
+                                    htmlFor="text"
+                                    className={classnames(
+                                        styles.label,
+                                        values.text !== '' && styles.labelTop,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Text
+                                </label>
+                                <span
+                                    className={classnames(
+                                        styles.help,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Required
+                                </span>
+                            </div>
 
-                            <LabelFile htmlFor="image">
-                                Image
-                                <Input
-                                    id="image"
+                            <div
+                                className={classnames(
+                                    styles.formGroup,
+                                    styles.typographyBody2,
+                                    touched.text &&
+                                    errors.text &&
+                                    values.text !== ''
+                                        ? styles.error
+                                        : ''
+                                )}
+                            >
+                                <input
+                                    id="fileInput"
                                     name="image"
                                     type="file"
+                                    accept="image/*"
+                                    required
                                     onChange={event => {
-                                        this.imagePreview(event);
-
                                         setFieldValue(
                                             'image',
                                             event.currentTarget.files[0]
                                         );
+                                        this.setState({
+                                            file: event.target.files[0].name
+                                        });
                                     }}
                                 />
-                            </LabelFile>
-
-                            <Image src={file} />
+                                <Button
+                                    id="fileButton"
+                                    label="Upload image"
+                                    buttonSize="small"
+                                    onClick={this.handleClick}
+                                />
+                                {file}
+                                <span
+                                    className={classnames(
+                                        styles.help,
+                                        styles.typographyCaption
+                                    )}
+                                >
+                                    Required
+                                </span>
+                            </div>
 
                             {isSubmitting && (
-                                <Alert error>Created with success</Alert>
+                                <button type="button">Sent with success</button>
                             )}
 
-                            <WrapperButton>
-                                <Button
-                                    type="submit"
-                                    disabled={
-                                        (Object.keys(errors).length !== 0 &&
-                                            !isSubmitting) ||
-                                        !dirty
-                                    }
-                                    label="Create post"
-                                />
-                            </WrapperButton>
-                        </Form>
+                            <div className={styles.formFooter}>
+                                <Button type="submit" label="Create post" />
+                            </div>
+                        </form>
                     )}
                 />
-            </Wrapper>
+            </div>
         );
     }
 }

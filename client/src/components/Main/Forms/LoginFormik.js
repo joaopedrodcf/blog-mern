@@ -2,16 +2,8 @@ import React from 'react';
 import { Formik } from 'formik';
 import { PropTypes } from 'prop-types';
 
-import {
-    Label,
-    ErrorLabel,
-    Form,
-    WrapperTitle,
-    Wrapper,
-    Input,
-    WrapperButton,
-    Alert
-} from './style';
+import classnames from 'classnames';
+import styles from './styles.module.scss';
 
 import Button from '../../Button';
 
@@ -39,8 +31,8 @@ function validate(values) {
     return errors;
 }
 
-const LoginFormik = ({ login, errorMessage }) => (
-    <Wrapper>
+const LoginFormik = ({ login }) => (
+    <div className={styles.wrapper}>
         <Formik
             initialValues={{
                 email: '',
@@ -55,71 +47,111 @@ const LoginFormik = ({ login, errorMessage }) => (
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
-                dirty
+                isSubmitting
             }) => (
-                <Form onSubmit={handleSubmit}>
-                    <WrapperTitle>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.formTitle}>
                         <h5>Login</h5>
-                    </WrapperTitle>
+                    </div>
 
-                    <Label htmlFor="email">
-                        Email
-                        <Input
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.email && errors.email && values.email !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
+                            id="email"
                             type="email"
                             name="email"
-                            placeholder="Email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.email)
+                            )}
                         />
-                    </Label>
-                    <ErrorLabel>
-                        {' '}
-                        {touched.email &&
-                            errors.email && <div>{errors.email}</div>}
-                    </ErrorLabel>
+                        <label
+                            htmlFor="email"
+                            className={classnames(
+                                styles.label,
+                                values.email !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Email
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Required
+                        </span>
+                    </div>
 
-                    <Label htmlFor="password">
-                        Password
-                        <Input
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.password &&
+                            errors.password &&
+                            values.password !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
+                            id="password"
                             type="password"
                             name="password"
-                            placeholder="Password"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.password}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.password)
+                            )}
                         />
-                    </Label>
+                        <label
+                            htmlFor="password"
+                            className={classnames(
+                                styles.label,
+                                values.password !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Password
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Required
+                        </span>
+                    </div>
 
-                    <ErrorLabel>
-                        {' '}
-                        {touched.password &&
-                            errors.password && <div>{errors.password}</div>}
-                    </ErrorLabel>
-
-                    {errorMessage && <Alert error>{errorMessage}</Alert>}
-
-                    <WrapperButton>
-                        <Button
-                            type="submit"
-                            disabled={
-                                (Object.keys(errors).length !== 0 &&
-                                    !isSubmitting) ||
-                                !dirty
-                            }
-                            label="Login"
-                        />
-                    </WrapperButton>
-                </Form>
+                    {isSubmitting && (
+                        <button type="button">Sent with success</button>
+                    )}
+                    <div className={styles.formFooter}>
+                        <Button type="submit" label="Login" />
+                    </div>
+                </form>
             )}
         />
-    </Wrapper>
+    </div>
 );
 
 LoginFormik.propTypes = {
-    login: PropTypes.func.isRequired,
-    errorMessage: PropTypes.string
+    login: PropTypes.func.isRequired
 };
 
 export default LoginFormik;

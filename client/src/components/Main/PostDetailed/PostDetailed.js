@@ -55,7 +55,6 @@ class PostDetailed extends React.Component {
             isAuthenticated
         } = this.props;
 
-        console.log(this.props);
         return (
             <>
                 {title !== undefined && (

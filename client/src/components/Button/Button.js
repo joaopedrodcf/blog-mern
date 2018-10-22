@@ -10,7 +10,7 @@ export const SIZES = {
     LARGE: 'large'
 };
 
-const Button = ({ buttonSize, label, rest }) => (
+const Button = ({ buttonSize, label, ...rest }) => (
     <button
         className={classnames(
             styles.button,

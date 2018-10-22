@@ -47,6 +47,21 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
+        case actionTypes.COMMENT_START:
+            return {
+                ...state
+            };
+        case actionTypes.COMMENT_SUCCESS:
+            return {
+                ...state,
+                text: action.payload.text,
+                postId: action.payload.postId
+            };
+        case actionTypes.COMMENT_ERROR:
+            return {
+                ...state
+            };
+
         default:
             return state;
     }

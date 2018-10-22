@@ -1,6 +1,11 @@
 import actionTypes from './actionsTypes';
 
-import { registerService, loginService, logoutService } from '../services/api';
+import {
+    registerService,
+    loginService,
+    logoutService,
+    createCommentService
+} from '../services/api';
 
 /*
  * action creators
@@ -27,7 +32,6 @@ export function loginStart() {
 }
 
 export function registerError(err) {
-    console.log(err);
     return {
         type: actionTypes.REGISTER_ERROR,
         payload: { err }
@@ -62,6 +66,26 @@ export function logoutSuccess() {
 export function logoutStart() {
     return {
         type: actionTypes.LOGOUT_START
+    };
+}
+
+export function commentError(err) {
+    return {
+        type: actionTypes.COMMENT_ERROR,
+        payload: { err }
+    };
+}
+
+export function commentSuccess(text, postId) {
+    return {
+        type: actionTypes.COMMENT_SUCCESS,
+        payload: { text, postId }
+    };
+}
+
+export function commentStart() {
+    return {
+        type: actionTypes.COMMENT_START
     };
 }
 
@@ -104,5 +128,20 @@ export function logout() {
         logoutService();
 
         dispatch(logoutSuccess());
+    };
+}
+
+export function comment(text, postId) {
+    return dispatch => {
+        dispatch(commentStart());
+
+        createCommentService(text, postId).then(
+            () => {
+                dispatch(commentSuccess(text, postId));
+            },
+            err => {
+                dispatch(commentError(err));
+            }
+        );
     };
 }

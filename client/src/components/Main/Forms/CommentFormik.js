@@ -2,15 +2,8 @@ import React from 'react';
 import { Formik } from 'formik';
 
 import PropTypes from 'prop-types';
-import {
-    Label,
-    ErrorLabel,
-    Form,
-    WrapperTitle,
-    Wrapper,
-    Input,
-    WrapperButton
-} from './style';
+import classnames from 'classnames';
+import styles from './styles.module.scss';
 import { createCommentService } from '../../../services/api';
 import Button from '../../Button';
 
@@ -38,7 +31,7 @@ function validate(values) {
 }
 
 const CommentFormik = ({ postId }) => (
-    <Wrapper>
+    <div className={styles.wrapper}>
         <Formik
             initialValues={{
                 text: ''
@@ -54,44 +47,62 @@ const CommentFormik = ({ postId }) => (
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
-                dirty
+                isSubmitting
             }) => (
-                <Form onSubmit={handleSubmit}>
-                    <WrapperTitle>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.formTitle}>
                         <h5>Comment</h5>
-                    </WrapperTitle>
-                    <Label htmlFor="text">
-                        Text
-                        <Input
+                    </div>
+                    <div
+                        className={classnames(
+                            styles.formGroup,
+                            touched.text && errors.text && values.text !== ''
+                                ? styles.error
+                                : ''
+                        )}
+                    >
+                        <input
+                            id="text"
                             type="text"
                             name="text"
-                            placeholder="Text"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.name}
+                            value={values.text}
+                            required
+                            className={classnames(
+                                styles.input,
+                                (styles.inputActivated: values.text)
+                            )}
                         />
-                    </Label>
-                    <ErrorLabel>
-                        {touched.name &&
-                            errors.name && <div>{errors.name}</div>}
-                    </ErrorLabel>
-
-                    <WrapperButton>
-                        <Button
-                            type="submit"
-                            disabled={
-                                (Object.keys(errors).length !== 0 &&
-                                    !isSubmitting) ||
-                                !dirty
-                            }
-                            label="Create comment"
-                        />
-                    </WrapperButton>
-                </Form>
+                        <label
+                            htmlFor="text"
+                            className={classnames(
+                                styles.label,
+                                values.name !== '' && styles.labelTop,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Text
+                        </label>
+                        <span
+                            className={classnames(
+                                styles.help,
+                                styles.typographyCaption
+                            )}
+                        >
+                            Required
+                        </span>
+                    </div>
+                    {isSubmitting && (
+                        <button type="button">Sent with success</button>
+                    )}
+                    <div className={styles.formFooter}>
+                        <Button type="submit" label="Comment" />
+                    </div>
+                </form>
             )}
         />
-    </Wrapper>
+    </div>
 );
 
 CommentFormik.propTypes = {

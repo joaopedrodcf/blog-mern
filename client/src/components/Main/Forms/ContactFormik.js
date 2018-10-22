@@ -58,8 +58,7 @@ const ContactFormik = () => (
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
-                dirty
+                isSubmitting
             }) => (
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formTitle}>
@@ -74,6 +73,7 @@ const ContactFormik = () => (
                         )}
                     >
                         <input
+                            id="name"
                             type="text"
                             name="name"
                             onChange={handleChange}
@@ -101,11 +101,7 @@ const ContactFormik = () => (
                                 styles.typographyCaption
                             )}
                         >
-                            {touched.name && errors.name ? (
-                                <>{errors.name}</>
-                            ) : (
-                                'Required'
-                            )}
+                            Required
                         </span>
                     </div>
                     <div
@@ -117,6 +113,7 @@ const ContactFormik = () => (
                         )}
                     >
                         <input
+                            id="email"
                             type="email"
                             name="email"
                             onChange={handleChange}
@@ -144,11 +141,9 @@ const ContactFormik = () => (
                                 styles.typographyCaption
                             )}
                         >
-                            {touched.email && errors.email ? (
-                                <>{errors.email}</>
-                            ) : (
-                                'Required'
-                            )}
+                            {touched.email && errors.email
+                                ? `${errors.email}`
+                                : 'Required'}
                         </span>
                     </div>
                     <div
@@ -162,6 +157,7 @@ const ContactFormik = () => (
                         )}
                     >
                         <input
+                            id="message"
                             name="message"
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -188,26 +184,14 @@ const ContactFormik = () => (
                                 styles.typographyCaption
                             )}
                         >
-                            {touched.message && errors.message ? (
-                                <>{errors.message}</>
-                            ) : (
-                                'Required'
-                            )}
+                            Required
                         </span>
                     </div>
                     {isSubmitting && (
                         <button type="button">Sent with success</button>
                     )}
                     <div className={styles.formFooter}>
-                        <Button
-                            type="submit"
-                            disabled={
-                                (Object.keys(errors).length !== 0 &&
-                                    !isSubmitting) ||
-                                !dirty
-                            }
-                            label="Send message"
-                        />
+                        <Button type="submit" label="Send message" />
                     </div>
                 </form>
             )}
