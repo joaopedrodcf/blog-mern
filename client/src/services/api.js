@@ -4,7 +4,7 @@ const urlLogin = `/api/login`;
 const urlRegister = `/api/register`;
 const urlPost = `/api/post`;
 const urlContact = `/api/send-email`;
-const urlGetPosts = `/api/posts/`;
+const urlGetPosts = `/api/posts`;
 const urlGetPost = `/api/post/`;
 const urlCreateComment = `/api/comment`;
 
@@ -75,11 +75,15 @@ export function getPostsService(page, currentPage, isMinus, isPlus) {
         curPage = currentPage + 1;
     }
 
-    return axios.get(urlGetPosts + curPage);
+    return axios.get(`${urlGetPosts}/${curPage}`);
 }
 
 export function getPost(id) {
     return axios.get(urlGetPost + id);
+}
+
+export function getAllPostsService() {
+    return axios.get(urlGetPosts);
 }
 
 export function createCommentService(text, postId) {

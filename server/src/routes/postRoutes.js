@@ -100,4 +100,21 @@ module.exports = app => {
             });
         });
     });
+
+    app.get('/api/posts', (req, res, next) => {
+        const query = Post.find({})
+            .populate('author', 'email')
+            .populate({
+                path: 'comments',
+                populate: { path: 'author', select: 'email' }
+            });
+
+        query.exec((error, posts) => {
+            if (error) return next(error);
+
+            return res.status(200).send({
+                posts
+            });
+        });
+    });
 };

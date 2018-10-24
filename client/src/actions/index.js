@@ -4,17 +4,16 @@ import {
     registerService,
     loginService,
     logoutService,
-    createCommentService
+    createCommentService,
+    getAllPostsService
 } from '../services/api';
 
 /*
  * action creators
  */
-
-export function loginError(err) {
+export function loginStart() {
     return {
-        type: actionTypes.LOGIN_ERROR,
-        payload: { err }
+        type: actionTypes.LOGIN_START
     };
 }
 
@@ -25,16 +24,16 @@ export function loginSuccess(email) {
     };
 }
 
-export function loginStart() {
+export function loginError(err) {
     return {
-        type: actionTypes.LOGIN_START
+        type: actionTypes.LOGIN_ERROR,
+        payload: { err }
     };
 }
 
-export function registerError(err) {
+export function registerStart() {
     return {
-        type: actionTypes.REGISTER_ERROR,
-        payload: { err }
+        type: actionTypes.REGISTER_START
     };
 }
 
@@ -45,21 +44,10 @@ export function registerSuccess(email) {
     };
 }
 
-export function registerStart() {
+export function registerError(err) {
     return {
-        type: actionTypes.REGISTER_START
-    };
-}
-
-export function logoutError() {
-    return {
-        type: actionTypes.LOGOUT_ERROR
-    };
-}
-
-export function logoutSuccess() {
-    return {
-        type: actionTypes.LOGOUT_SUCCESS
+        type: actionTypes.REGISTER_ERROR,
+        payload: { err }
     };
 }
 
@@ -69,10 +57,21 @@ export function logoutStart() {
     };
 }
 
-export function commentError(err) {
+export function logoutSuccess() {
     return {
-        type: actionTypes.COMMENT_ERROR,
-        payload: { err }
+        type: actionTypes.LOGOUT_SUCCESS
+    };
+}
+
+export function logoutError() {
+    return {
+        type: actionTypes.LOGOUT_ERROR
+    };
+}
+
+export function commentStart() {
+    return {
+        type: actionTypes.COMMENT_START
     };
 }
 
@@ -83,9 +82,30 @@ export function commentSuccess(text, postId) {
     };
 }
 
-export function commentStart() {
+export function commentError(err) {
     return {
-        type: actionTypes.COMMENT_START
+        type: actionTypes.COMMENT_ERROR,
+        payload: { err }
+    };
+}
+
+export function getPostsStart() {
+    return {
+        type: actionTypes.GET_POSTS_START
+    };
+}
+
+export function getPostsSuccess(posts) {
+    return {
+        type: actionTypes.GET_POSTS_SUCCESS,
+        payload: { posts }
+    };
+}
+
+export function getPostsError(err) {
+    return {
+        type: actionTypes.GET_POSTS_ERROR,
+        payload: { err }
     };
 }
 
@@ -141,6 +161,21 @@ export function comment(text, postId) {
             },
             err => {
                 dispatch(commentError(err));
+            }
+        );
+    };
+}
+
+export function getPosts() {
+    return dispatch => {
+        dispatch(getPostsStart());
+
+        getAllPostsService().then(
+            response => {
+                dispatch(getPostsSuccess(response.data.posts));
+            },
+            err => {
+                dispatch(getPostsError(err));
             }
         );
     };

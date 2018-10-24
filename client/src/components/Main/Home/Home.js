@@ -2,7 +2,6 @@
 import React from 'react';
 
 import { ContainerPages, PaginationButton } from './style';
-import Post from '../Post/Post';
 import { getPostsService } from '../../../services/api';
 import Card from '../../Card';
 
@@ -20,6 +19,9 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
+        const { getPosts } = this.props;
+
+        getPosts();
         this.getPostsPagination(1);
     }
 

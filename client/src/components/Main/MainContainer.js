@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Main from './Main';
-import { login, register, comment } from '../../actions';
+import { login, register, comment, getPosts } from '../../actions';
 
 const mapStateToProps = (
     { isAuthenticated, email, errorMessage },
@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => ({
     },
     comment: (text, postId) => {
         dispatch(comment(text, postId));
+    },
+    getPosts: () => {
+        dispatch(getPosts());
     }
 });
 

@@ -61,6 +61,19 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
+        case actionTypes.GET_POSTS_START:
+            return {
+                ...state
+            };
+        case actionTypes.GET_POSTS_SUCCESS:
+            return {
+                ...state,
+                posts: action.payload.posts
+            };
+        case actionTypes.GET_POSTS_ERROR:
+            return {
+                ...state
+            };
 
         default:
             return state;

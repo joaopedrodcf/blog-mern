@@ -28,7 +28,7 @@ RouteAuthenticated.propTypes = {
 const Main = props => (
     <Container>
         <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={() => <Home {...props} />} />
             <Route exact path="/contactus" component={ContactFormik} />
             <RouteUnauthenticated
                 {...props}

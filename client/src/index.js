@@ -23,7 +23,9 @@ library.add(fab, faBars, faWindowClose, faHeart, faShareAlt);
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('token'),
-    email: localStorage.getItem('email')
+    email: localStorage.getItem('email'),
+    posts: [],
+    user: {}
 };
 
 const store = createStore(
