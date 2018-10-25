@@ -5,13 +5,15 @@ import Main from './Main';
 import { login, register, comment, getPosts } from '../../actions';
 
 const mapStateToProps = (
-    { isAuthenticated, email, errorMessage },
+    { isAuthenticated, email, errorMessage, posts, user },
     ownProps
 ) => ({
     isAuthenticated,
     email,
     errorMessage,
-    ownProps
+    ownProps,
+    posts,
+    user
 });
 
 const mapDispatchToProps = dispatch => ({
