@@ -1,0 +1,12 @@
+@import "../../../../styles/global-styles.scss";
+
+.card{
+    box-shadow: $box-shadow-2dp;
+    border-radius: $space-4;
+    margin: $space-24 0;
+    padding: $space-12;
+}
+
+.header{
+    margin: $space-24 0;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -24,33 +24,64 @@ RouteAuthenticated.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
 };
 
-// Use render instead of component to pass props
-const Main = props => (
-    <Container>
-        <Switch>
-            <Route exact path="/" render={() => <Home {...props} />} />
-            <Route exact path="/contactus" component={ContactFormik} />
-            <RouteUnauthenticated
-                {...props}
-                exact
-                path="/login"
-                render={() => <LoginFormik {...props} />}
-            />
-            <RouteUnauthenticated
-                {...props}
-                exact
-                path="/register"
-                render={() => <RegisterFormik {...props} />}
-            />
-            <RouteAuthenticated
-                {...props}
-                exact
-                path="/create-post"
-                render={() => <CreatePostFormik {...props} />}
-            />
-            <Route exact path="/post/:id" component={PostDetailed} {...props} />
-        </Switch>
-    </Container>
-);
+class Main extends Component {
+    componentDidMount() {
+        const { getPosts } = this.props;
+
+        getPosts();
+    }
+
+    getPost(id) {
+        const { posts } = this.props;
+
+        return posts.find(post => post._id === id);
+    }
+
+    render() {
+        const { createComment } = this.props;
+
+        return (
+            <Container>
+                <Switch>
+                    <Route
+                        exact
+                        path="/"
+                        render={() => <Home {...this.props} />}
+                    />
+                    <Route exact path="/contactus" component={ContactFormik} />
+                    <RouteUnauthenticated
+                        {...this.props}
+                        exact
+                        path="/login"
+                        render={() => <LoginFormik {...this.props} />}
+                    />
+                    <RouteUnauthenticated
+                        {...this.props}
+                        exact
+                        path="/register"
+                        render={() => <RegisterFormik {...this.props} />}
+                    />
+                    <RouteAuthenticated
+                        {...this.props}
+                        exact
+                        path="/create-post"
+                        render={() => <CreatePostFormik {...this.props} />}
+                    />
+                    <Route
+                        exact
+                        path="/post/:id"
+                        render={props => (
+                            <PostDetailed
+                                {...props}
+                                post={this.getPost(props.match.params.id)}
+                                createComment={createComment}
+                            />
+                        )}
+                    />
+                </Switch>
+            </Container>
+        );
+    }
+}
 
 export default Main;

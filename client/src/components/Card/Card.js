@@ -2,14 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
-import Button from '../Button';
 import Anchor from '../Anchor';
 
 const formatDate = date => new Date(date).toDateString();
 
-const Card = ({ _id, title, date, description, image, author }) => (
+const renderCard = (_id, title, description) => (
+    <>
+        <div className={classnames(styles.cardText, styles.typographyBody1)}>
+            {description}
+        </div>
+        <div className={styles.cardOptions}>
+            <Anchor
+                to={`/post/${_id}`}
+                colorAnchor="blue"
+                otherStyles={classnames(styles.typographyButton, styles.reset)}
+                title={title}
+            >
+                Read more
+            </Anchor>
+            <div className={styles.optionsLeft}>
+                <div className={styles.heart}>
+                    <FontAwesomeIcon icon="heart" />
+                </div>
+                <div className={styles.shareAlt}>
+                    <FontAwesomeIcon icon="share-alt" />
+                </div>
+            </div>
+        </div>
+    </>
+);
+
+const renderCardDetail = text => (
+    <>
+        <div className={classnames(styles.cardText, styles.typographyBody1)}>
+            {text}
+        </div>
+    </>
+);
+
+const Card = ({
+    _id,
+    title,
+    date,
+    description,
+    image,
+    author,
+    text,
+    isDetailed
+}) => (
     <div className={styles.card}>
         <div className={styles.cardTitle}>
             <h5>{title}</h5>
@@ -25,26 +66,9 @@ const Card = ({ _id, title, date, description, image, author }) => (
         <div className={styles.cardImage}>
             <img alt="img-card" src={image} />
         </div>
-        <div className={classnames(styles.cardText, styles.typographyBody1)}>
-            {description}
-        </div>
-        <div className={styles.cardOptions}>
-            <Anchor
-                to={`/post/${_id}`}
-                colorAnchor="blue"
-                otherStyles={classnames(styles.typographyButton, styles.reset)}
-            >
-                Read more
-            </Anchor>
-            <div className={styles.optionsLeft}>
-                <div className={styles.heart}>
-                    <FontAwesomeIcon icon="heart" />
-                </div>
-                <div className={styles.shareAlt}>
-                    <FontAwesomeIcon icon="share-alt" />
-                </div>
-            </div>
-        </div>
+        {isDetailed
+            ? renderCardDetail(text)
+            : renderCard(_id, title, description)}
     </div>
 );
 
@@ -54,7 +78,9 @@ Card.propTypes = {
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    author: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    text: PropTypes.string.isRequired,
+    isDetailed: PropTypes.bool.isRequired
 };
 
 export default Card;

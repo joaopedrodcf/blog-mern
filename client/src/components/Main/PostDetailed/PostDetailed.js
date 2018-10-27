@@ -1,109 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Container,
-    Article,
-    Figure,
-    FigureContainer,
-    Comment,
-    CommentSection
-} from './style';
-import { getPost } from '../../../services/api';
+import classnames from 'classnames';
+import styles from './styles.module.scss';
+import CommentCard from '../../CommentCard';
 import CommentFormik from '../Forms/CommentFormik';
+import Card from '../../Card';
 
-const formatDate = date => new Date(date).toDateString();
-
-class PostDetailed extends React.Component {
-    // This type of constructor is useful basically is doing {match} = this.props.match
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            post: {},
-            author: {},
-            comments: []
-        };
-    }
-
-    componentDidMount() {
-        this.getPost();
-    }
-
-    getPost() {
-        const {
-            match: {
-                params: { id }
-            }
-        } = this.props;
-
-        getPost(id).then(response => {
-            this.setState({
-                post: response.data,
-                author: response.data.author,
-                comments: response.data.comments
-            });
-        });
-    }
-
-    render() {
-        const { post, author, comments } = this.state;
-        const { title, date, text, image } = post;
-        const {
-            match: {
-                params: { id }
-            },
-            isAuthenticated
-        } = this.props;
-
-        return (
+const PostDetailed = ({ match, post, createComment }) => (
+    <>
+        {post !== undefined && (
             <>
-                {title !== undefined && (
-                    <>
-                        <Container>
-                            <Article>
-                                <h2>{title}</h2>
-                                <h4>
-                                    {author.email} on {formatDate(date)}
-                                </h4>
-                                <p>{text}</p>
-                            </Article>
-                            <FigureContainer>
-                                <Figure src={image} alt="about-me-img" />
-                            </FigureContainer>
-                        </Container>
-
-                        <CommentFormik postId={id} />
-
-                        <CommentSection>
-                            <h3>Comments section</h3>
-
-                            {comments.length === 0 &&
-                                isAuthenticated === true && (
-                                    <h6>
-                                        There are no comments yet *Login to be
-                                        able to comment
-                                    </h6>
-                                )}
-
-                            {comments.map(comment => (
-                                <Comment>
-                                    <p>Author: {comment.author.email}</p>
-                                    <p>text: {comment.text}</p>
-                                </Comment>
-                            ))}
-                        </CommentSection>
-                    </>
-                )}
+                <Card key={post._id} isDetailed {...post} />
+                <CommentFormik
+                    postId={match.params.id}
+                    createComment={createComment}
+                />
+                <div className={styles.card}>
+                    <div className={styles.header}>
+                        <h5> User comments </h5>
+                    </div>
+                    {post.comments.map(comment => (
+                        <CommentCard {...comment} />
+                    ))}
+                </div>
             </>
-        );
-    }
-}
+        )}
+    </>
+);
 
 PostDetailed.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({ id: PropTypes.number.isRequired })
-    }).isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    post: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    createComment: PropTypes.func.isRequired
 };
 
 export default PostDetailed;

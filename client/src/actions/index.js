@@ -75,10 +75,10 @@ export function commentStart() {
     };
 }
 
-export function commentSuccess(text, postId) {
+export function commentSuccess(text, postId, comment) {
     return {
         type: actionTypes.COMMENT_SUCCESS,
-        payload: { text, postId }
+        payload: { text, postId, comment }
     };
 }
 
@@ -151,13 +151,12 @@ export function logout() {
     };
 }
 
-export function comment(text, postId) {
+export function createComment(text, postId) {
     return dispatch => {
         dispatch(commentStart());
-
         createCommentService(text, postId).then(
-            () => {
-                dispatch(commentSuccess(text, postId));
+            response => {
+                dispatch(commentSuccess(text, postId, response.data.comment));
             },
             err => {
                 dispatch(commentError(err));
