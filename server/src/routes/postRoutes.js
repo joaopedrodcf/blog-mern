@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+
 const Joi = require('joi');
 const { findUserById } = require('./utils');
 const verifyToken = require('./verifyToken');
@@ -51,7 +53,19 @@ module.exports = app => {
                 post.save(err => {
                     if (err) return res.status(400).send({ message: err });
 
-                    return res.status(201).send({ message: 'Post created' });
+                    post.populate(
+                        { path: 'author', select: 'email' },
+                        (err, post) => {
+                            if (err)
+                                return res.status(500).send({
+                                    message: 'There was a problem.'
+                                });
+
+                            return res
+                                .status(201)
+                                .send({ message: 'Post created', post });
+                        }
+                    );
                 });
             });
         }
@@ -103,6 +117,7 @@ module.exports = app => {
 
     app.get('/api/posts', (req, res, next) => {
         const query = Post.find({})
+            .sort('-date')
             .populate('author', 'email')
             .populate({
                 path: 'comments',

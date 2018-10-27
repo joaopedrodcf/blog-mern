@@ -38,7 +38,7 @@ class Main extends Component {
     }
 
     render() {
-        const { createComment } = this.props;
+        const { createComment, createPost } = this.props;
 
         return (
             <Container>
@@ -65,7 +65,12 @@ class Main extends Component {
                         {...this.props}
                         exact
                         path="/create-post"
-                        render={() => <CreatePostFormik {...this.props} />}
+                        render={() => (
+                            <CreatePostFormik
+                                {...this.props}
+                                createPost={createPost}
+                            />
+                        )}
                     />
                     <Route
                         exact

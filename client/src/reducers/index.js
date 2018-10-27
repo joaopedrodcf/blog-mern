@@ -18,6 +18,7 @@ const authentication = (state = [], action) => {
                 ...state,
                 errorMessage: action.payload.err.response.data.message
             };
+
         case actionTypes.REGISTER_START:
             return {
                 ...state
@@ -34,6 +35,7 @@ const authentication = (state = [], action) => {
                 ...state,
                 errorMessage: 'The user already exists' // needs dev in BE to pass error message correctly
             };
+
         case actionTypes.LOGOUT_START:
             return {
                 ...state
@@ -47,13 +49,12 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
+
         case actionTypes.COMMENT_START:
             return {
                 ...state
             };
-        case actionTypes.COMMENT_SUCCESS: {
-            console.log(state);
-
+        case actionTypes.COMMENT_SUCCESS:
             return {
                 ...state,
                 posts: state.posts.map(
@@ -69,11 +70,11 @@ const authentication = (state = [], action) => {
                             : post
                 )
             };
-        }
         case actionTypes.COMMENT_ERROR:
             return {
                 ...state
             };
+
         case actionTypes.GET_POSTS_START:
             return {
                 ...state
@@ -84,6 +85,20 @@ const authentication = (state = [], action) => {
                 posts: action.payload.posts
             };
         case actionTypes.GET_POSTS_ERROR:
+            return {
+                ...state
+            };
+
+        case actionTypes.CREATE_POST_START:
+            return {
+                ...state
+            };
+        case actionTypes.CREATE_POST_SUCCESS:
+            return {
+                ...state,
+                posts: [action.payload.post, ...state.posts]
+            };
+        case actionTypes.CREATE_POST_ERROR:
             return {
                 ...state
             };

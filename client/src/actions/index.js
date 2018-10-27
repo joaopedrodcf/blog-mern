@@ -5,7 +5,8 @@ import {
     loginService,
     logoutService,
     createCommentService,
-    getAllPostsService
+    getAllPostsService,
+    createPostService
 } from '../services/api';
 
 /*
@@ -109,6 +110,26 @@ export function getPostsError(err) {
     };
 }
 
+export function createPostStart() {
+    return {
+        type: actionTypes.CREATE_POST_START
+    };
+}
+
+export function createPostSuccess(post) {
+    return {
+        type: actionTypes.CREATE_POST_SUCCESS,
+        payload: { post }
+    };
+}
+
+export function createPostError(err) {
+    return {
+        type: actionTypes.CREATE_POST_ERROR,
+        payload: { err }
+    };
+}
+
 /*
  * action creators async
  */
@@ -175,6 +196,21 @@ export function getPosts() {
             },
             err => {
                 dispatch(getPostsError(err));
+            }
+        );
+    };
+}
+
+export function createPost(title, description, text, image) {
+    return dispatch => {
+        dispatch(createPostStart());
+
+        createPostService(title, description, text, image).then(
+            response => {
+                dispatch(createPostSuccess(response.data.post));
+            },
+            err => {
+                dispatch(createPostError(err));
             }
         );
     };
