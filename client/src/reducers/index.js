@@ -51,12 +51,25 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.COMMENT_SUCCESS:
+        case actionTypes.COMMENT_SUCCESS: {
+            console.log(state);
+
             return {
                 ...state,
-                text: action.payload.text,
-                postId: action.payload.postId
+                posts: state.posts.map(
+                    post =>
+                        post._id === action.payload.postId
+                            ? {
+                                  ...post,
+                                  comments: [
+                                      ...post.comments,
+                                      action.payload.comment
+                                  ]
+                              }
+                            : post
+                )
             };
+        }
         case actionTypes.COMMENT_ERROR:
             return {
                 ...state

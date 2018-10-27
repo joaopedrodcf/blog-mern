@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const Joi = require('joi');
 const { findUserById } = require('./utils');
 const verifyToken = require('./verifyToken');
@@ -63,7 +64,7 @@ module.exports = app => {
 
                         comment.populate(
                             { path: 'author', select: 'email' },
-                            (err, commentPopulated) => {
+                            (err, comment) => {
                                 if (err)
                                     return res.status(500).send({
                                         message: 'There was a problem.'
@@ -71,7 +72,7 @@ module.exports = app => {
 
                                 return res.status(201).send({
                                     message: 'Comment created',
-                                    commentPopulated
+                                    comment
                                 });
                             }
                         );

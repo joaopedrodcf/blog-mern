@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import Global from './style';
 import HeaderContainer from './components/Header/HeaderContainer';
 import MainContainer from './components/Main/MainContainer';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer';
 import theme from './theme';
 
 const Routes = () => (

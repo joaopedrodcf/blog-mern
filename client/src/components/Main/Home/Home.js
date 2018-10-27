@@ -1,24 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Card from '../../Card';
 
-export default class Home extends React.Component {
-    componentDidMount() {
-        const { getPosts } = this.props;
+const Home = ({ posts }) => (
+    <div>
+        {posts.map(post => (
+            <Card key={post._id} isDetailed={false} {...post} />
+        ))}
+    </div>
+);
 
-        getPosts();
-    }
+Home.propTypes = {
+    posts: PropTypes.arrayOf()
+};
 
-    render() {
-        const { posts } = this.props;
-
-        return (
-            <div>
-                {posts.map(post => (
-                    <Card key={post._id} {...post} />
-                ))}
-            </div>
-        );
-    }
-}
+export default Home;

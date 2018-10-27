@@ -4,20 +4,13 @@ import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import { createCommentService } from '../../../services/api';
 import Button from '../../Button';
 
-function createComment(values, postId, { resetForm }) {
+function handleCreateComment(values, postId, createComment, { resetForm }) {
     const { text } = values;
 
-    createCommentService(text, postId).then(
-        () => {
-            resetForm();
-        },
-        () => {
-            resetForm();
-        }
-    );
+    createComment(text, postId);
+    resetForm();
 }
 
 function validate(values) {
@@ -30,7 +23,7 @@ function validate(values) {
     return errors;
 }
 
-const CommentFormik = ({ postId }) => (
+const CommentFormik = ({ postId, createComment }) => (
     <div className={styles.wrapper}>
         <Formik
             initialValues={{
@@ -38,7 +31,7 @@ const CommentFormik = ({ postId }) => (
             }}
             validate={values => validate(values)}
             onSubmit={(values, ...rest) =>
-                createComment(values, postId, ...rest)
+                handleCreateComment(values, postId, createComment, ...rest)
             }
             render={({
                 values,
@@ -78,7 +71,7 @@ const CommentFormik = ({ postId }) => (
                             htmlFor="text"
                             className={classnames(
                                 styles.label,
-                                values.name !== '' && styles.labelTop,
+                                values.text !== '' && styles.labelTop,
                                 styles.typographyCaption
                             )}
                         >
@@ -106,7 +99,8 @@ const CommentFormik = ({ postId }) => (
 );
 
 CommentFormik.propTypes = {
-    postId: PropTypes.number.isRequired
+    postId: PropTypes.number.isRequired,
+    createComment: PropTypes.func.isRequired
 };
 
 export default CommentFormik;
