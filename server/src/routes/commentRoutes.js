@@ -61,9 +61,20 @@ module.exports = app => {
                     post.save(err => {
                         if (err) return res.status(400).send({ message: err });
 
-                        return res
-                            .status(201)
-                            .send({ message: 'Comment created' });
+                        comment.populate(
+                            { path: 'author', select: 'email' },
+                            (err, commentPopulated) => {
+                                if (err)
+                                    return res.status(500).send({
+                                        message: 'There was a problem.'
+                                    });
+
+                                return res.status(201).send({
+                                    message: 'Comment created',
+                                    commentPopulated
+                                });
+                            }
+                        );
                     });
                 });
             });
