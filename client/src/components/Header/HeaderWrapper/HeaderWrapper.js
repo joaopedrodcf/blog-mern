@@ -5,6 +5,7 @@ import Wrapper from './style';
 import Nav from '../Nav';
 import Logo from '../Logo';
 import HamburguerButton from '../HamburguerButton';
+import Anchor from '../../Anchor';
 
 const HeaderWrapper = ({
     handleClick,
@@ -13,9 +14,9 @@ const HeaderWrapper = ({
     logoutRedux
 }) => (
     <Wrapper>
-        <Link to="/">
-            <Logo />
-        </Link>
+        <Anchor to="/">
+            <h5>Blog-mern-demo</h5>
+        </Anchor>
         <Nav
             isAuthenticated={isAuthenticated}
             email={email}

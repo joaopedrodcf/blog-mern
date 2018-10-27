@@ -4,24 +4,15 @@ import React, { Component } from 'react';
 import { Formik } from 'formik';
 
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 import Button from '../../Button';
 
-import { createPostService } from '../../../services/api';
-
-function createPost(values, { resetForm }) {
+function handleCreatePost(values, createPost, { resetForm }) {
     const { title, description, text, image } = values;
-
-    createPostService(title, description, text, image).then(
-        () => {
-            resetForm();
-            document.querySelector('input[type=file]').value = '';
-        },
-        () => {
-            resetForm();
-            document.querySelector('input[type=file]').value = '';
-        }
-    );
+    createPost(title, description, text, image);
+    resetForm();
+    document.querySelector('input[type=file]').value = '';
 }
 
 function validate(values) {
@@ -79,6 +70,8 @@ class CreatePostFormik extends Component {
 
     render() {
         const { file } = this.state;
+        const { createPost } = this.props;
+
         return (
             <div className={styles.wrapper}>
                 <Formik
@@ -89,7 +82,9 @@ class CreatePostFormik extends Component {
                         image: ''
                     }}
                     validate={values => validate(values)}
-                    onSubmit={(values, ...rest) => createPost(values, ...rest)}
+                    onSubmit={(values, ...rest) =>
+                        handleCreatePost(values, createPost, ...rest)
+                    }
                     render={({
                         values,
                         errors,
@@ -292,5 +287,9 @@ class CreatePostFormik extends Component {
         );
     }
 }
+
+CreatePostFormik.prototypes = {
+    createPost: PropTypes.func.isRequired
+};
 
 export default CreatePostFormik;

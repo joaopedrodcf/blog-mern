@@ -6,15 +6,21 @@ import CommentCard from '../../CommentCard';
 import CommentFormik from '../Forms/CommentFormik';
 import Card from '../../Card';
 
-const PostDetailed = ({ match, post, createComment }) => (
+const PostDetailed = ({ match, post, createComment, isAuthenticated }) => (
     <>
         {post !== undefined && (
             <>
                 <Card key={post._id} isDetailed {...post} />
-                <CommentFormik
-                    postId={match.params.id}
-                    createComment={createComment}
-                />
+                {isAuthenticated ? (
+                    <CommentFormik
+                        postId={match.params.id}
+                        createComment={createComment}
+                    />
+                ) : (
+                    <div className={styles.header}>
+                        <h5> Loggin to comment </h5>
+                    </div>
+                )}
                 <div className={styles.card}>
                     <div className={styles.header}>
                         <h5> User comments </h5>
