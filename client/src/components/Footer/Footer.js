@@ -1,11 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Anchor from '../Anchor';
 
 const Footer = () => (
     <footer>
-        <div>
+        <div className={styles.links}>
             <Anchor href="https://github.com/joaopedrodcf">
                 <FontAwesomeIcon icon={['fab', 'github-square']} size="2x" />
             </Anchor>
@@ -19,7 +20,11 @@ const Footer = () => (
                 <FontAwesomeIcon icon={['fab', 'medium']} size="2x" />
             </Anchor>
         </div>
-        <div className={styles.typographySubtitle1}>© João Ferreira 2018</div>
+        <div
+            className={classnames(styles.copyright, styles.typographySubtitle1)}
+        >
+            © João Ferreira 2018
+        </div>
     </footer>
 );
 

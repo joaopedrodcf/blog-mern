@@ -4,6 +4,12 @@
     box-shadow: $box-shadow-2dp;
     border-radius: $space-4;
     margin: $space-24 0;
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .cardTitle{
