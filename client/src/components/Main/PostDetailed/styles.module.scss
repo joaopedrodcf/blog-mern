@@ -9,5 +9,17 @@
 
 .header{
     text-align: center;
-    margin: $space-24 0;
+}
+
+.warnWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-top: $space-48;
+    margin-bottom: $space-12;
+
+    text-align: center;
+}
+
+.warn{
+    margin: $space-12 0;
 }

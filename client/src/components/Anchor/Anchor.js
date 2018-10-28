@@ -26,6 +26,7 @@ const index = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
             </a>
         ) : (
             <Link
+                exact
                 to={to}
                 className={classnames(
                     styles.anchor,

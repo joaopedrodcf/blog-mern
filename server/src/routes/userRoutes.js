@@ -30,7 +30,7 @@ module.exports = app => {
 
             // create a token
             const token = jwt.sign({ id: user._id }, config.secret, {
-                expiresIn: 86400 // expires in 24 hours
+                expiresIn: 604800 // expires in 7 days
             });
 
             return res.status(200).send({ auth: true, token });

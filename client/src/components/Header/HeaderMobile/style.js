@@ -6,6 +6,7 @@ const Wrapper = styled.div`
     height: 100vh;
     width: 100vw;
     z-index: 10;
+    overflow: hidden;
     ${props => !props.toogle && 'display: none;'};
 
     div {

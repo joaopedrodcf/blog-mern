@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 
 import Button from '../../Button';
+import Anchor from '../../Anchor';
 
 function handleLogin(values, login, { resetForm }) {
     const { email, password } = values;
@@ -141,9 +142,23 @@ const LoginFormik = ({ login }) => (
                     {isSubmitting && (
                         <button type="button">Sent with success</button>
                     )}
-                    <div className={styles.formFooter}>
+                    <div
+                        className={classnames(
+                            styles.footer,
+                            styles.typographyButton
+                        )}
+                    >
+                        <Anchor to="/register" colorAnchor="blue">
+                            Register now
+                        </Anchor>
                         <Button type="submit" label="Login" />
                     </div>
+                    <div
+                        className={classnames(
+                            styles.options,
+                            styles.typographyButton
+                        )}
+                    />
                 </form>
             )}
         />

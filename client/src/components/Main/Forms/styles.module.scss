@@ -85,3 +85,10 @@
 input[type="file"]{
     display:none;
 }
+
+.footer{
+    margin-top: $space-24;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

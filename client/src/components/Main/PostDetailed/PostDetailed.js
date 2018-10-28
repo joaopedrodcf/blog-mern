@@ -5,6 +5,8 @@ import styles from './styles.module.scss';
 import CommentCard from '../../CommentCard';
 import CommentFormik from '../Forms/CommentFormik';
 import Card from '../../Card';
+import Anchor from '../../Anchor';
+import Button from '../../Button';
 
 const PostDetailed = ({ match, post, createComment, isAuthenticated }) => (
     <>
@@ -17,8 +19,20 @@ const PostDetailed = ({ match, post, createComment, isAuthenticated }) => (
                         createComment={createComment}
                     />
                 ) : (
-                    <div className={styles.header}>
-                        <h5> Loggin to comment </h5>
+                    <div className={styles.warnWrapper}>
+                        <div className={classnames(styles.typographyBody1)}>
+                            Please login to comment
+                        </div>
+                        <div
+                            className={classnames(
+                                styles.warn,
+                                styles.typographyButton
+                            )}
+                        >
+                            <Anchor to="/login">
+                                <Button label="login" />
+                            </Anchor>
+                        </div>
                     </div>
                 )}
                 <div className={styles.card}>

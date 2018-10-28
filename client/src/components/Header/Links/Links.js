@@ -26,12 +26,6 @@ const Links = ({ isAuthenticated }) => (
                 Create post
             </Link>
         )}
-
-        {isAuthenticated === true && (
-            <Link exact to="/settings">
-                Settings
-            </Link>
-        )}
     </>
 );
 
