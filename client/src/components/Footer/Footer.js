@@ -10,7 +10,7 @@ const Footer = () => (
             <Anchor href="https://github.com/joaopedrodcf">
                 <FontAwesomeIcon icon={['fab', 'github-square']} size="2x" />
             </Anchor>
-            <Anchor href="https://www.linkedin.com/in/joaoferr93">
+            <Anchor href="https://www.linkedin.com/in/joaopedrodcf/">
                 <FontAwesomeIcon icon={['fab', 'linkedin']} size="2x" />
             </Anchor>
             <Anchor href="https://twitter.com/Joaopedrodcf">

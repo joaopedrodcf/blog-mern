@@ -31,7 +31,7 @@
     transition: all 0.3s ease;
 }
 
-.input{
+.input, .textarea {
     border: 0.1rem solid $gray-500;
     border-radius: $space-4;
     // fix for chrome
@@ -43,13 +43,19 @@
     color: $gray-900;
 }
 
-.input:hover {
+.textarea{
+    padding: $space-16 $space-12;
+    resize: none;
+}
+
+.input:hover, .textarea:hover {
     border: 0.1rem solid $black;
 }
 
-.input:focus {
+.input:focus, .textarea:focus {
     border: 0.2rem solid $primary;
 }
+
 
 .help{
     font-size: $typography-12;
@@ -66,14 +72,16 @@
     color: $red !important;
 }
 
-.input:focus + .label , .input:valid + .label, .labelTop{
+.input:focus + .label , .input:valid + .label, .labelTop,
+.textarea:focus + label, .textarea:valid + .label {
     top:$space-16;
     left:$space-8;
     font-size: $typography-12;
     color: $primary;
 }
 
-.input:not(:focus) + .label{
+.input:not(:focus) + .label,
+.textarea:not(:focus) + .label{
     color: $gray-700;
 }
 

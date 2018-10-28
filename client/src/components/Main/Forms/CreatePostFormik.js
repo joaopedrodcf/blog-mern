@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import autosize from 'autosize';
 import styles from './styles.module.scss';
 import Button from '../../Button';
 
@@ -17,6 +18,9 @@ function handleCreatePost(values, createPost, { resetForm }) {
 
 function validate(values) {
     const errors = {};
+
+    autosize(document.getElementById('description'));
+    autosize(document.getElementById('text'));
 
     if (!values.title) {
         errors.title = 'Required';
@@ -152,7 +156,7 @@ class CreatePostFormik extends Component {
                                         : ''
                                 )}
                             >
-                                <input
+                                <textarea
                                     id="description"
                                     type="text"
                                     name="description"
@@ -161,8 +165,8 @@ class CreatePostFormik extends Component {
                                     value={values.description}
                                     required
                                     className={classnames(
-                                        styles.input,
-                                        (styles.inputActivated: values.description)
+                                        styles.textarea,
+                                        (styles.textareaActivated: values.description)
                                     )}
                                 />
                                 <label
@@ -196,7 +200,7 @@ class CreatePostFormik extends Component {
                                         : ''
                                 )}
                             >
-                                <input
+                                <textarea
                                     id="text"
                                     type="text"
                                     name="text"
@@ -205,8 +209,8 @@ class CreatePostFormik extends Component {
                                     value={values.text}
                                     required
                                     className={classnames(
-                                        styles.input,
-                                        (styles.inputActivated: values.text)
+                                        styles.textarea,
+                                        (styles.textareaActivated: values.text)
                                     )}
                                 />
                                 <label
@@ -288,7 +292,7 @@ class CreatePostFormik extends Component {
     }
 }
 
-CreatePostFormik.prototypes = {
+CreatePostFormik.propTypes = {
     createPost: PropTypes.func.isRequired
 };
 

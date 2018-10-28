@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 
 import classnames from 'classnames';
+import autosize from 'autosize';
 import styles from './styles.module.scss';
 import { contactService } from '../../../services/api';
 import Button from '../../Button';
@@ -21,6 +22,8 @@ function sendMessage(values, { resetForm }) {
 
 function validate(values) {
     const errors = {};
+
+    autosize(document.getElementById('message'));
 
     if (!values.email) {
         errors.email = 'Required';
@@ -156,7 +159,7 @@ const ContactFormik = () => (
                                 : ''
                         )}
                     >
-                        <input
+                        <textarea
                             id="message"
                             name="message"
                             onChange={handleChange}
@@ -164,8 +167,8 @@ const ContactFormik = () => (
                             value={values.message}
                             required
                             className={classnames(
-                                styles.input,
-                                (styles.inputActivated: values.message)
+                                styles.textarea,
+                                (styles.textareaActivated: values.message)
                             )}
                         />
                         <label
