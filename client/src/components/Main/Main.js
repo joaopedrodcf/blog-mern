@@ -10,18 +10,18 @@ import RegisterFormik from './Forms/RegisterFormik';
 import CreatePostFormik from './Forms/CreatePostFormik';
 import LoginFormik from './Forms/LoginFormik';
 
-const RouteUnauthenticated = ({ isAuthenticated, ...props }) =>
-    !isAuthenticated ? <Route {...props} /> : <Redirect to="/" />;
+const RouteUnauthenticated = ({ user, ...props }) =>
+    !Object.keys(user).length ? <Route {...props} /> : <Redirect to="/" />;
 
-const RouteAuthenticated = ({ isAuthenticated, ...props }) =>
-    isAuthenticated ? <Route {...props} /> : <Redirect to="/" />;
+const RouteAuthenticated = ({ user, ...props }) =>
+    Object.keys(user).length ? <Route {...props} /> : <Redirect to="/" />;
 
 RouteUnauthenticated.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    user: PropTypes.shape.isRequired
 };
 
 RouteAuthenticated.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    user: PropTypes.shape.isRequired
 };
 
 class Main extends Component {
