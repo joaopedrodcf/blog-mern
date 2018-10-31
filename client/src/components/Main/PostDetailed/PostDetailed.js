@@ -8,12 +8,12 @@ import Card from '../../Card';
 import Anchor from '../../Anchor';
 import Button from '../../Button';
 
-const PostDetailed = ({ match, post, createComment, isAuthenticated }) => (
+const PostDetailed = ({ match, post, createComment, user }) => (
     <>
         {post !== undefined && (
             <>
                 <Card key={post._id} isDetailed {...post} />
-                {isAuthenticated ? (
+                {Object.keys(user).length ? (
                     <CommentFormik
                         postId={match.params.id}
                         createComment={createComment}
