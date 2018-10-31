@@ -9,6 +9,9 @@ const authentication = (state = [], action) => {
         case actionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
+                user: {
+                    email: action.payload.email
+                },
                 isAuthenticated: true,
                 errorMessage: 'success',
                 email: action.payload.email
@@ -26,6 +29,9 @@ const authentication = (state = [], action) => {
         case actionTypes.REGISTER_SUCCESS:
             return {
                 ...state,
+                user: {
+                    email: action.payload.email
+                },
                 isAuthenticated: true,
                 errorMessage: 'success',
                 email: action.payload.email
@@ -43,6 +49,7 @@ const authentication = (state = [], action) => {
         case actionTypes.LOGOUT_SUCCESS:
             return {
                 ...state,
+                user: {},
                 isAuthenticated: false
             };
         case actionTypes.LOGOUT_ERROR:

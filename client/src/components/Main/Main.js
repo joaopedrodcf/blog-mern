@@ -38,7 +38,7 @@ class Main extends Component {
     }
 
     render() {
-        const { createComment, createPost, isAuthenticated } = this.props;
+        const { createComment, createPost, isAuthenticated, user } = this.props;
 
         return (
             <Container>
@@ -80,7 +80,7 @@ class Main extends Component {
                                 {...props}
                                 post={this.getPost(props.match.params.id)}
                                 createComment={createComment}
-                                isAuthenticated={isAuthenticated}
+                                user={user}
                             />
                         )}
                     />
