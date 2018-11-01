@@ -1,8 +1,3 @@
-
-
-
-$font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
 // use with white text only
 $primary: #01579b;
 $primary-light: #4f83cc;
@@ -54,8 +49,11 @@ $space-28: 2.8rem;
 $space-32: 3.2rem;
 $space-48: 4.8rem;
 $space-56: 5.6rem;
-$space-64: 5.6rem;
+$space-64: 6.4rem;
 $space-88: 8.8rem;
+$space-96: 9.6rem;
+$space-104: 10.4rem;
+$space-112: 12.2rem;
 
 $font-weight-light: 300;
 $font-weight-regular: 400;
@@ -90,27 +88,6 @@ $box-shadow-16dp: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.
 
 /* Modal */
 $box-shadow-24dp: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.20);
-
-body,
-html,
-#root {
-    height: 100%;
-    font-size: 62.5%;
-}
-
-:global( html, #root){
-    height: 100%;
-    height: 100%;
-}
-
-// default rules
-* {
-    font-family: $font-family;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    //font-size: 62.5%;
-}
 
 h1{
     letter-spacing: -1.5/16 + 0rem;

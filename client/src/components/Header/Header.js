@@ -29,6 +29,7 @@ class Header extends React.Component {
 
     render() {
         const { toogle } = this.state;
+        const { user } = this.props;
 
         return (
             <div className={styles.header}>
@@ -38,7 +39,7 @@ class Header extends React.Component {
                         <h5>Blog mern demo</h5>
                     </Anchor>
                     <Modal show={toogle} handleClose={this.handleClick}>
-                        <Drawer show={toogle} user={this.props.user} />
+                        <Drawer show={toogle} user={user} />
                     </Modal>
                 </div>
                 <div className={styles.left}>
