@@ -41,6 +41,8 @@ Then install the node_modules
 yarn
 ```
 
+First you need to see the section `Enviroment variables`
+
 Finally you can start dev enviroment
 
 ```shell
@@ -61,15 +63,20 @@ yarn start:prod
 
 Now its ready to use
 
-## The project is ready to run in heroku you just need to add the follwing command
-
-Without this the create-react-app build will not be successful
-
-```shell
-heroku config:set NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false
-```
-
 ## Enviroment variables needed
+
+Create a .env file inside the server folder and put the necessary configurations
+
+```vars
+SECRET=
+ENDPOINT=http://localhost:3000
+DB=
+GMAIL_USER=
+GMAIL_PASSWORD=
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+```
 
 For cloudinary
 
@@ -96,4 +103,12 @@ For JWT
 
 ```vars
 SECRET
+```
+
+## The project is ready to run in heroku you just need to add the follwing command
+
+Without this the create-react-app build will not be successful
+
+```shell
+heroku config:set NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false
 ```
