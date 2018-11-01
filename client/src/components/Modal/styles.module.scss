@@ -18,6 +18,6 @@
     visibility: hidden;
 }
 
-#root{
+:global( #root){
     overflow-x: hidden;
 }
