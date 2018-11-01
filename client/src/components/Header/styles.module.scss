@@ -1,22 +1,21 @@
 @import "../../../styles/global-styles.scss";
 
-footer{
-    grid-area: footer;
+.header{
+    grid-area: header;
     background-color: $primary;
     color: $white;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     box-shadow: $box-shadow-12dp;
     font-size: $typography-24;
     padding: $space-12;
 }
-
-.links{
-    margin: $space-12 0;
+.right{
+    
 }
 
-.copyright{
-    margin: $space-12 0;
+.left{
+
 }

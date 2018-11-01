@@ -1,0 +1,37 @@
+@import "../../../styles/global-styles.scss";
+
+.drawer{
+    position:fixed;
+    top:0;
+    left: -25.6rem;
+    width: 25.6rem;
+    background-color: $white;
+    color: $black;
+    height: 100%;
+    transition: all 0.5s ease;
+    box-shadow: $box-shadow-16dp;
+    z-index: 100;
+    opacity: 0;
+}
+
+.drawerShow{
+    left: 0px;
+    opacity: 1;
+}
+
+.header{
+    padding: $space-16;
+}
+
+.links{
+    color: $black;
+    padding: $space-16;
+
+    li {
+        list-style:none;
+    }
+
+    ul {
+        margin-bottom: $space-12;
+    }
+}

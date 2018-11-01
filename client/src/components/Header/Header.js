@@ -1,6 +1,13 @@
 import React from 'react';
-import HeaderMobile from './HeaderMobile';
-import HeaderWrapper from './HeaderWrapper';
+import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './styles.module.scss';
+import Drawer from '../Drawer';
+import Anchor from '../Anchor';
+
+import Modal from '../Modal';
+
+const cx = classnames.bind(styles);
 
 class Header extends React.Component {
     constructor(props) {
@@ -22,15 +29,22 @@ class Header extends React.Component {
 
     render() {
         const { toogle } = this.state;
+
         return (
-            <>
-                <HeaderWrapper handleClick={this.handleClick} {...this.props} />
-                <HeaderMobile
-                    handleClick={this.handleClick}
-                    toogle={toogle}
-                    {...this.props}
-                />
-            </>
+            <div className={styles.header}>
+                <div className={styles.right}>
+                    <FontAwesomeIcon icon="bars" onClick={this.handleClick} />
+                    <Anchor to="/">
+                        <h5>Blog mern demo</h5>
+                    </Anchor>
+                    <Modal show={toogle} handleClose={this.handleClick}>
+                        <Drawer show={toogle} user={this.props.user} />
+                    </Modal>
+                </div>
+                <div className={styles.left}>
+                    <FontAwesomeIcon icon="user-circle" />
+                </div>
+            </div>
         );
     }
 }

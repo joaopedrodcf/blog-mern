@@ -38,7 +38,7 @@ class Main extends Component {
     }
 
     render() {
-        const { createComment, createPost, isAuthenticated, user } = this.props;
+        const { createComment, createPost, user } = this.props;
 
         return (
             <Container>

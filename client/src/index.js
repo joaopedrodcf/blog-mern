@@ -12,14 +12,14 @@ import {
     faWindowClose,
     faBars,
     faHeart,
-    faShareAlt
+    faShareAlt,
+    faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 import Routes from './Routes';
 import reducers from './reducers';
-import './globalStyle';
 
-library.add(fab, faBars, faWindowClose, faHeart, faShareAlt);
+library.add(fab, faBars, faWindowClose, faHeart, faShareAlt, faUserCircle);
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('token'),
