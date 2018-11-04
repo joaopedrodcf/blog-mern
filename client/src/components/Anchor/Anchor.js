@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 
+const cx = classnames.bind(styles);
+
 export const COLORS = {
     WHITE: 'white',
     YELLOW: 'yellow',
@@ -16,7 +18,7 @@ const index = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
         {to === undefined ? (
             <a
                 {...rest}
-                className={classnames(
+                className={cx(
                     styles.anchor,
                     styles[colorAnchor || COLORS.WHITE],
                     otherStyles
@@ -28,7 +30,7 @@ const index = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
             <Link
                 exact
                 to={to}
-                className={classnames(
+                className={cx(
                     styles.anchor,
                     styles[colorAnchor || COLORS.WHITE],
                     otherStyles

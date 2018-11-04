@@ -8,6 +8,8 @@ import styles from './styles.module.scss';
 import Button from '../../Button';
 import Anchor from '../../Anchor';
 
+const cx = classnames.bind(styles);
+
 function handleRegister(values, register, { resetForm }) {
     const { email, password } = values;
     register(email, password);
@@ -58,7 +60,7 @@ const RegisterFormik = ({ register }) => (
                     </div>
 
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.email && errors.email && values.email !== ''
                                 ? styles.error
@@ -73,14 +75,14 @@ const RegisterFormik = ({ register }) => (
                             onBlur={handleBlur}
                             value={values.email}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.email)
                             )}
                         />
                         <label
                             htmlFor="email"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.email !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -89,7 +91,7 @@ const RegisterFormik = ({ register }) => (
                             Email
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -99,7 +101,7 @@ const RegisterFormik = ({ register }) => (
                     </div>
 
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.password &&
                             errors.password &&
@@ -116,14 +118,14 @@ const RegisterFormik = ({ register }) => (
                             onBlur={handleBlur}
                             value={values.password}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.password)
                             )}
                         />
                         <label
                             htmlFor="password"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.password !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -132,7 +134,7 @@ const RegisterFormik = ({ register }) => (
                             Password
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -144,12 +146,7 @@ const RegisterFormik = ({ register }) => (
                     {isSubmitting && (
                         <button type="button">Sent with success</button>
                     )}
-                    <div
-                        className={classnames(
-                            styles.footer,
-                            styles.typographyButton
-                        )}
-                    >
+                    <div className={cx(styles.footer, styles.typographyButton)}>
                         <Anchor to="/login" colorAnchor="blue">
                             Login now
                         </Anchor>

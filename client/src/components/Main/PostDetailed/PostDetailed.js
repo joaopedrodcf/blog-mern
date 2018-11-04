@@ -8,6 +8,8 @@ import Card from '../../Card';
 import Anchor from '../../Anchor';
 import Button from '../../Button';
 
+const cx = classnames.bind(styles);
+
 const PostDetailed = ({ match, post, createComment, user }) => (
     <>
         {post !== undefined && (
@@ -20,14 +22,11 @@ const PostDetailed = ({ match, post, createComment, user }) => (
                     />
                 ) : (
                     <div className={styles.warnWrapper}>
-                        <div className={classnames(styles.typographyBody1)}>
+                        <div className={cx(styles.typographyBody1)}>
                             Please login to comment
                         </div>
                         <div
-                            className={classnames(
-                                styles.warn,
-                                styles.typographyButton
-                            )}
+                            className={cx(styles.warn, styles.typographyButton)}
                         >
                             <Anchor to="/login">
                                 <Button label="login" />

@@ -11,7 +11,7 @@ const mapStateToProps = ({ isAuthenticated, email, user }, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    logoutRedux: () => {
+    logout: () => {
         dispatch(logout());
     }
 });

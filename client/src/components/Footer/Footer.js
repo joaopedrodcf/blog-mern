@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Anchor from '../Anchor';
 
+const cx = classnames.bind(styles);
+
 const Footer = () => (
     <footer>
         <div className={styles.links}>
@@ -20,9 +22,7 @@ const Footer = () => (
                 <FontAwesomeIcon icon={['fab', 'medium']} size="2x" />
             </Anchor>
         </div>
-        <div
-            className={classnames(styles.copyright, styles.typographySubtitle1)}
-        >
+        <div className={cx(styles.copyright, styles.typographySubtitle1)}>
             © João Ferreira 2018
         </div>
     </footer>

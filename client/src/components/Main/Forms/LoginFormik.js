@@ -8,6 +8,8 @@ import styles from './styles.module.scss';
 import Button from '../../Button';
 import Anchor from '../../Anchor';
 
+const cx = classnames.bind(styles);
+
 function handleLogin(values, login, { resetForm }) {
     const { email, password } = values;
     login(email, password);
@@ -56,7 +58,7 @@ const LoginFormik = ({ login }) => (
                     </div>
 
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.email && errors.email && values.email !== ''
                                 ? styles.error
@@ -71,14 +73,14 @@ const LoginFormik = ({ login }) => (
                             onBlur={handleBlur}
                             value={values.email}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.email)
                             )}
                         />
                         <label
                             htmlFor="email"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.email !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -87,7 +89,7 @@ const LoginFormik = ({ login }) => (
                             Email
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -97,7 +99,7 @@ const LoginFormik = ({ login }) => (
                     </div>
 
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.password &&
                             errors.password &&
@@ -114,14 +116,14 @@ const LoginFormik = ({ login }) => (
                             onBlur={handleBlur}
                             value={values.password}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.password)
                             )}
                         />
                         <label
                             htmlFor="password"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.password !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -130,7 +132,7 @@ const LoginFormik = ({ login }) => (
                             Password
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -142,22 +144,14 @@ const LoginFormik = ({ login }) => (
                     {isSubmitting && (
                         <button type="button">Sent with success</button>
                     )}
-                    <div
-                        className={classnames(
-                            styles.footer,
-                            styles.typographyButton
-                        )}
-                    >
+                    <div className={cx(styles.footer, styles.typographyButton)}>
                         <Anchor to="/register" colorAnchor="blue">
                             Register now
                         </Anchor>
                         <Button type="submit" label="Login" />
                     </div>
                     <div
-                        className={classnames(
-                            styles.options,
-                            styles.typographyButton
-                        )}
+                        className={cx(styles.options, styles.typographyButton)}
                     />
                 </form>
             )}

@@ -6,6 +6,8 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Button from '../../Button';
 
+const cx = classnames.bind(styles);
+
 function handleCreateComment(values, postId, createComment, { resetForm }) {
     const { text } = values;
 
@@ -47,7 +49,7 @@ const CommentFormik = ({ postId, createComment }) => (
                         <h5>Comment</h5>
                     </div>
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.text && errors.text && values.text !== ''
                                 ? styles.error
@@ -62,14 +64,14 @@ const CommentFormik = ({ postId, createComment }) => (
                             onBlur={handleBlur}
                             value={values.text}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.text)
                             )}
                         />
                         <label
                             htmlFor="text"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.text !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -78,7 +80,7 @@ const CommentFormik = ({ postId, createComment }) => (
                             Text
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}

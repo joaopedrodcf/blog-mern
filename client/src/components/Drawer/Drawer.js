@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './styles.module.scss';
 import Anchor from '../Anchor';
 
-const Drawer = ({ user, show }) => (
-    <div className={classnames(styles.drawer, show ? [styles.drawerShow] : '')}>
+const cx = classnames.bind(styles);
+
+const Drawer = ({ user, show, handleLogout }) => (
+    <div className={cx(styles.drawer, show ? [styles.drawerShow] : '')}>
         <div className={styles.header}>
             <h5>Blog mern demo</h5>
         </div>
@@ -23,11 +25,22 @@ const Drawer = ({ user, show }) => (
                 </ul>
 
                 {Object.keys(user).length ? (
-                    <ul>
-                        <Anchor exact to="/create-post" colorAnchor="blue">
-                            Create post
-                        </Anchor>
-                    </ul>
+                    <>
+                        <ul>
+                            <Anchor exact to="/create-post" colorAnchor="blue">
+                                Create post
+                            </Anchor>
+                        </ul>
+                        <ul>
+                            <Anchor
+                                exact
+                                colorAnchor="blue"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </Anchor>
+                        </ul>
+                    </>
                 ) : (
                     <>
                         <ul>

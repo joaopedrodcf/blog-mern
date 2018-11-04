@@ -9,6 +9,8 @@ import autosize from 'autosize';
 import styles from './styles.module.scss';
 import Button from '../../Button';
 
+const cx = classnames.bind(styles);
+
 function handleCreatePost(values, createPost, { resetForm }) {
     const { title, description, text, image } = values;
     createPost(title, description, text, image);
@@ -104,7 +106,7 @@ class CreatePostFormik extends Component {
                                 <h5>Create post</h5>
                             </div>
                             <div
-                                className={classnames(
+                                className={cx(
                                     styles.formGroup,
                                     touched.title &&
                                     errors.title &&
@@ -121,14 +123,14 @@ class CreatePostFormik extends Component {
                                     onBlur={handleBlur}
                                     value={values.title}
                                     required
-                                    className={classnames(
+                                    className={cx(
                                         styles.input,
                                         (styles.inputActivated: values.title)
                                     )}
                                 />
                                 <label
                                     htmlFor="title"
-                                    className={classnames(
+                                    className={cx(
                                         styles.label,
                                         values.title !== '' && styles.labelTop,
                                         styles.typographyCaption
@@ -137,7 +139,7 @@ class CreatePostFormik extends Component {
                                     Title
                                 </label>
                                 <span
-                                    className={classnames(
+                                    className={cx(
                                         styles.help,
                                         styles.typographyCaption
                                     )}
@@ -147,7 +149,7 @@ class CreatePostFormik extends Component {
                             </div>
 
                             <div
-                                className={classnames(
+                                className={cx(
                                     styles.formGroup,
                                     touched.description &&
                                     errors.description &&
@@ -164,14 +166,14 @@ class CreatePostFormik extends Component {
                                     onBlur={handleBlur}
                                     value={values.description}
                                     required
-                                    className={classnames(
+                                    className={cx(
                                         styles.textarea,
                                         (styles.textareaActivated: values.description)
                                     )}
                                 />
                                 <label
                                     htmlFor="description"
-                                    className={classnames(
+                                    className={cx(
                                         styles.label,
                                         values.description !== '' &&
                                             styles.labelTop,
@@ -181,7 +183,7 @@ class CreatePostFormik extends Component {
                                     Description
                                 </label>
                                 <span
-                                    className={classnames(
+                                    className={cx(
                                         styles.help,
                                         styles.typographyCaption
                                     )}
@@ -191,7 +193,7 @@ class CreatePostFormik extends Component {
                             </div>
 
                             <div
-                                className={classnames(
+                                className={cx(
                                     styles.formGroup,
                                     touched.text &&
                                     errors.text &&
@@ -208,14 +210,14 @@ class CreatePostFormik extends Component {
                                     onBlur={handleBlur}
                                     value={values.text}
                                     required
-                                    className={classnames(
+                                    className={cx(
                                         styles.textarea,
                                         (styles.textareaActivated: values.text)
                                     )}
                                 />
                                 <label
                                     htmlFor="text"
-                                    className={classnames(
+                                    className={cx(
                                         styles.label,
                                         values.text !== '' && styles.labelTop,
                                         styles.typographyCaption
@@ -224,7 +226,7 @@ class CreatePostFormik extends Component {
                                     Text
                                 </label>
                                 <span
-                                    className={classnames(
+                                    className={cx(
                                         styles.help,
                                         styles.typographyCaption
                                     )}
@@ -234,7 +236,7 @@ class CreatePostFormik extends Component {
                             </div>
 
                             <div
-                                className={classnames(
+                                className={cx(
                                     styles.formGroup,
                                     styles.typographyBody2,
                                     touched.text &&
@@ -268,7 +270,7 @@ class CreatePostFormik extends Component {
                                 />
                                 {file}
                                 <span
-                                    className={classnames(
+                                    className={cx(
                                         styles.help,
                                         styles.typographyCaption
                                     )}

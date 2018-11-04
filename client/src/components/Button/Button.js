@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
+const cx = classnames.bind(styles);
+
 export const SIZES = {
     SMALL: 'small',
     MEDIUM: 'medium',
@@ -12,7 +14,7 @@ export const SIZES = {
 
 const Button = ({ buttonSize, label, ...rest }) => (
     <button
-        className={classnames(
+        className={cx(
             styles.button,
             styles[buttonSize || SIZES.MEDIUM],
             styles.typographyButton

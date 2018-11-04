@@ -7,6 +7,8 @@ import styles from './styles.module.scss';
 import { contactService } from '../../../services/api';
 import Button from '../../Button';
 
+const cx = classnames.bind(styles);
+
 function sendMessage(values, { resetForm }) {
     const { name, email, message } = values;
 
@@ -68,7 +70,7 @@ const ContactFormik = () => (
                         <h5>Contact us</h5>
                     </div>
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.name && errors.name && values.name !== ''
                                 ? styles.error
@@ -83,14 +85,14 @@ const ContactFormik = () => (
                             onBlur={handleBlur}
                             value={values.name}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.name)
                             )}
                         />
                         <label
                             htmlFor="name"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.name !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -99,7 +101,7 @@ const ContactFormik = () => (
                             Name
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -108,7 +110,7 @@ const ContactFormik = () => (
                         </span>
                     </div>
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.email && errors.email && values.email !== ''
                                 ? styles.error
@@ -123,14 +125,14 @@ const ContactFormik = () => (
                             onBlur={handleBlur}
                             value={values.email}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.input,
                                 (styles.inputActivated: values.email)
                             )}
                         />
                         <label
                             htmlFor="email"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.email !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -139,7 +141,7 @@ const ContactFormik = () => (
                             Email
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
@@ -150,7 +152,7 @@ const ContactFormik = () => (
                         </span>
                     </div>
                     <div
-                        className={classnames(
+                        className={cx(
                             styles.formGroup,
                             touched.message &&
                             errors.message &&
@@ -166,14 +168,14 @@ const ContactFormik = () => (
                             onBlur={handleBlur}
                             value={values.message}
                             required
-                            className={classnames(
+                            className={cx(
                                 styles.textarea,
                                 (styles.textareaActivated: values.message)
                             )}
                         />
                         <label
                             htmlFor="message"
-                            className={classnames(
+                            className={cx(
                                 styles.label,
                                 values.message !== '' && styles.labelTop,
                                 styles.typographyCaption
@@ -182,7 +184,7 @@ const ContactFormik = () => (
                             Message
                         </label>
                         <span
-                            className={classnames(
+                            className={cx(
                                 styles.help,
                                 styles.typographyCaption
                             )}
