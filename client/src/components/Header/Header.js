@@ -32,18 +32,23 @@ class Header extends React.Component {
         const { user } = this.props;
 
         return (
-            <div className={styles.header}>
-                <div className={styles.right}>
-                    <FontAwesomeIcon icon="bars" onClick={this.handleClick} />
-                    <Anchor to="/">
-                        <h5>Blog mern demo</h5>
-                    </Anchor>
-                    <Modal show={toogle} handleClose={this.handleClick}>
-                        <Drawer show={toogle} user={user} />
-                    </Modal>
-                </div>
-                <div className={styles.left}>
-                    <FontAwesomeIcon icon="user-circle" />
+            <div className={styles.headerFixed}>
+                <div className={styles.header}>
+                    <div className={styles.right}>
+                        <FontAwesomeIcon
+                            icon="bars"
+                            onClick={this.handleClick}
+                        />
+                        <Anchor to="/">
+                            <h5>Blog mern demo</h5>
+                        </Anchor>
+                        <Modal show={toogle} handleClose={this.handleClick}>
+                            <Drawer show={toogle} user={user} />
+                        </Modal>
+                    </div>
+                    <div className={styles.left}>
+                        <FontAwesomeIcon icon="user-circle" />
+                    </div>
                 </div>
             </div>
         );

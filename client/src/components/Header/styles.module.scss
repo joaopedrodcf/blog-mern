@@ -1,19 +1,26 @@
 @import "../../../styles/global-styles.scss";
 
-.header{
+.headerFixed{
+    position: fixed;
+    width: 100%;
     grid-area: header;
     background-color: $primary;
     color: $white;
+    box-shadow: $box-shadow-12dp;
+    font-size: $typography-24;
+    padding: $space-12;
+    z-index: 1;
+}
+
+.header{
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    box-shadow: $box-shadow-12dp;
-    font-size: $typography-24;
-    padding: $space-12;
-    position: relative;
-    width: 100%;
 }
+
 .right{
     
 }
