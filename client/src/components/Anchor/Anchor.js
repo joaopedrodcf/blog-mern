@@ -13,7 +13,7 @@ export const COLORS = {
     PURPLE: 'purple'
 };
 
-const index = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
+const Anchor = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
     <>
         {to === undefined ? (
             <a
@@ -42,9 +42,9 @@ const index = ({ colorAnchor, children, otherStyles, to, ...rest }) => (
     </>
 );
 
-index.propTypes = {
+Anchor.propTypes = {
     href: PropTypes.string.isRequired,
     content: PropTypes.element.isRequired
 };
 
-export default index;
+export default Anchor;

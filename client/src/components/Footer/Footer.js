@@ -9,16 +9,22 @@ const cx = classnames.bind(styles);
 const Footer = () => (
     <footer>
         <div className={styles.links}>
-            <Anchor href="https://github.com/joaopedrodcf">
+            <Anchor href="https://github.com/joaopedrodcf" aria-label="github">
                 <FontAwesomeIcon icon={['fab', 'github-square']} size="2x" />
             </Anchor>
-            <Anchor href="https://www.linkedin.com/in/joaopedrodcf/">
+            <Anchor
+                href="https://www.linkedin.com/in/joaopedrodcf/"
+                aria-label="linkedin"
+            >
                 <FontAwesomeIcon icon={['fab', 'linkedin']} size="2x" />
             </Anchor>
-            <Anchor href="https://twitter.com/Joaopedrodcf">
+            <Anchor
+                href="https://twitter.com/Joaopedrodcf"
+                aria-label="twitter"
+            >
                 <FontAwesomeIcon icon={['fab', 'twitter-square']} size="2x" />
             </Anchor>
-            <Anchor href="https://medium.com/@joaoferr93">
+            <Anchor href="https://medium.com/@joaoferr93" aria-label="medium">
                 <FontAwesomeIcon icon={['fab', 'medium']} size="2x" />
             </Anchor>
         </div>
