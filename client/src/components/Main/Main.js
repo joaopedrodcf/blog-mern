@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Container from './style';
-import Home from './Home/Home';
-import PostDetailed from './PostDetailed/PostDetailed';
+import './styles.module.scss';
+
+import Home from './Home';
+import PostDetailed from './PostDetailed';
 import ContactFormik from './Forms/ContactFormik';
 import RegisterFormik from './Forms/RegisterFormik';
 import CreatePostFormik from './Forms/CreatePostFormik';
@@ -41,7 +42,7 @@ class Main extends Component {
         const { createComment, createPost, user } = this.props;
 
         return (
-            <Container>
+            <main>
                 <Switch>
                     <Route
                         exact
@@ -85,7 +86,7 @@ class Main extends Component {
                         )}
                     />
                 </Switch>
-            </Container>
+            </main>
         );
     }
 }

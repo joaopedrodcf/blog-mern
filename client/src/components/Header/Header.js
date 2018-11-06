@@ -1,13 +1,10 @@
 import React from 'react';
-import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './styles.module.scss';
 import Drawer from '../Drawer';
 import Anchor from '../Anchor';
 
 import Modal from '../Modal';
-
-const cx = classnames.bind(styles);
 
 class Header extends React.Component {
     constructor(props) {
