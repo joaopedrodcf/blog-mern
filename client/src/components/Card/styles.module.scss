@@ -13,7 +13,7 @@
 }
 
 .cardTitle{
-    padding: $space-12 $space-12;
+    padding: $space-16;
 }
 
 .cardBy{
@@ -22,7 +22,7 @@
 
 .cardText{
     color:$gray-900;
-    padding: $space-12 $space-12;
+    padding: $space-16;
 }
 
 .cardImage{
@@ -33,7 +33,7 @@
 }
 
 .cardOptions{
-    padding: $space-12 $space-12;
+    padding: $space-16;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
