@@ -19,7 +19,8 @@ const PostSchema = new mongoose.Schema({
     },
     date: { type: Date, default: Date.now, required: true },
     author: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }]
+    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
+    likes: [{ type: mongoose.Schema.ObjectId, ref: 'Like' }]
 });
 
 module.exports = mongoose.model('Post', PostSchema);
