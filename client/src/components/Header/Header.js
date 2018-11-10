@@ -31,10 +31,11 @@ class Header extends React.Component {
         return (
             <div className={styles.headerFixed}>
                 <div className={styles.header}>
-                    <div className={styles.right}>
+                    <div>
                         <FontAwesomeIcon
                             icon="bars"
                             onClick={this.handleClick}
+                            className={styles.margin}
                         />
                         <Anchor to="/">
                             <h5>Blog mern demo</h5>
@@ -46,9 +47,6 @@ class Header extends React.Component {
                                 handleLogout={logout}
                             />
                         </Modal>
-                    </div>
-                    <div className={styles.left}>
-                        <FontAwesomeIcon icon="user-circle" />
                     </div>
                 </div>
             </div>

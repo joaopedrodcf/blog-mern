@@ -1,13 +1,6 @@
 import actionTypes from './actionsTypes';
 
-import {
-    registerService,
-    loginService,
-    logoutService,
-    createCommentService,
-    getAllPostsService,
-    createPostService
-} from '../services/api';
+import * as services from '../services/api';
 
 /*
  * action creators
@@ -130,6 +123,46 @@ export function createPostError(err) {
     };
 }
 
+export function likePostStart() {
+    return {
+        type: actionTypes.LIKE_POST_START
+    };
+}
+
+export function likePostSuccess(postId) {
+    return {
+        type: actionTypes.LIKE_POST_SUCCESS,
+        payload: { postId }
+    };
+}
+
+export function likePostError(err) {
+    return {
+        type: actionTypes.LIKE_POST_ERROR,
+        payload: { err }
+    };
+}
+
+export function dislikePostStart() {
+    return {
+        type: actionTypes.DISLIKE_POST_START
+    };
+}
+
+export function dislikePostSuccess(postId) {
+    return {
+        type: actionTypes.DISLIKE_POST_SUCCESS,
+        payload: { postId }
+    };
+}
+
+export function dislikePostError(err) {
+    return {
+        type: actionTypes.DISLIKE_POST_ERROR,
+        payload: { err }
+    };
+}
+
 /*
  * action creators async
  */
@@ -138,7 +171,7 @@ export function login(email, password) {
     return dispatch => {
         dispatch(loginStart());
 
-        loginService(email, password).then(
+        services.loginService(email, password).then(
             () => {
                 dispatch(loginSuccess(email));
             },
@@ -153,7 +186,7 @@ export function register(email, password) {
     return dispatch => {
         dispatch(registerStart());
 
-        registerService(email, password).then(
+        services.registerService(email, password).then(
             () => {
                 dispatch(registerSuccess(email));
             },
@@ -166,23 +199,9 @@ export function register(email, password) {
 
 export function logout() {
     return dispatch => {
-        logoutService();
+        services.logoutService();
 
         dispatch(logoutSuccess());
-    };
-}
-
-export function createComment(text, postId) {
-    return dispatch => {
-        dispatch(commentStart());
-        createCommentService(text, postId).then(
-            response => {
-                dispatch(commentSuccess(text, postId, response.data.comment));
-            },
-            err => {
-                dispatch(commentError(err));
-            }
-        );
     };
 }
 
@@ -190,7 +209,7 @@ export function getPosts() {
     return dispatch => {
         dispatch(getPostsStart());
 
-        getAllPostsService().then(
+        services.getAllPostsService().then(
             response => {
                 dispatch(getPostsSuccess(response.data.posts));
             },
@@ -205,12 +224,56 @@ export function createPost(title, description, text, image) {
     return dispatch => {
         dispatch(createPostStart());
 
-        createPostService(title, description, text, image).then(
+        services.createPostService(title, description, text, image).then(
             response => {
                 dispatch(createPostSuccess(response.data.post));
             },
             err => {
                 dispatch(createPostError(err));
+            }
+        );
+    };
+}
+
+export function createComment(text, postId) {
+    return dispatch => {
+        dispatch(commentStart());
+        services.createCommentService(text, postId).then(
+            response => {
+                dispatch(commentSuccess(text, postId, response.data.comment));
+            },
+            err => {
+                dispatch(commentError(err));
+            }
+        );
+    };
+}
+
+export function likePost(postId) {
+    return dispatch => {
+        dispatch(likePostStart());
+
+        services.likePostService(postId).then(
+            response => {
+                dispatch(likePostSuccess(postId, response.data.like));
+            },
+            err => {
+                dispatch(likePostError(err));
+            }
+        );
+    };
+}
+
+export function dislikePost(postId) {
+    return dispatch => {
+        dispatch(dislikePostStart());
+
+        services.dislikePostService(postId).then(
+            () => {
+                dispatch(dislikePostSuccess(postId));
+            },
+            err => {
+                dispatch(dislikePostError(err));
             }
         );
     };

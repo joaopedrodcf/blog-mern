@@ -1856,10 +1856,10 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-joaopedrodcf@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/eslint-config-joaopedrodcf/-/eslint-config-joaopedrodcf-1.0.8.tgz#b9c713a67cd9fa2a6564a1ead6bb082c0c3d7f51"
-  integrity sha512-/YI+tLXcezm8D3z+qmEoYopK9tYKUSU1QtKEJ3Yqqn3nWyKswtvXXFlBEuzuZPoCYkPVpmB9G/+Ad0dx6BadPg==
+eslint-config-joaopedrodcf@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/eslint-config-joaopedrodcf/-/eslint-config-joaopedrodcf-1.0.10.tgz#4069d46a65805762a88ed4d6ef7b6df428704aca"
+  integrity sha512-4s3G06S4DjjxmlEE2LWLw6s0/xyyiCfDAgmPUmZCS8k8OgnSxPEfN+n2NCYITUZL1RuVbzdvanAI9ZWLWtSt2Q==
 
 eslint-config-prettier@3.0.1:
   version "3.0.1"

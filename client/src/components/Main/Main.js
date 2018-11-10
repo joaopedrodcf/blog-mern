@@ -49,7 +49,7 @@ class Main extends Component {
                         path="/"
                         render={() => <Home {...this.props} />}
                     />
-                    <Route exact path="/contactus" component={ContactFormik} />
+                    <Route exact path="/contact-us" component={ContactFormik} />
                     <RouteUnauthenticated
                         {...this.props}
                         exact

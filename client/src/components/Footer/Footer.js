@@ -10,22 +10,22 @@ const Footer = () => (
     <footer>
         <div className={styles.links}>
             <Anchor href="https://github.com/joaopedrodcf" aria-label="github">
-                <FontAwesomeIcon icon={['fab', 'github-square']} size="2x" />
+                <FontAwesomeIcon icon={['fab', 'github-square']} />
             </Anchor>
             <Anchor
                 href="https://www.linkedin.com/in/joaopedrodcf/"
                 aria-label="linkedin"
             >
-                <FontAwesomeIcon icon={['fab', 'linkedin']} size="2x" />
+                <FontAwesomeIcon icon={['fab', 'linkedin']} />
             </Anchor>
             <Anchor
                 href="https://twitter.com/Joaopedrodcf"
                 aria-label="twitter"
             >
-                <FontAwesomeIcon icon={['fab', 'twitter-square']} size="2x" />
+                <FontAwesomeIcon icon={['fab', 'twitter-square']} />
             </Anchor>
             <Anchor href="https://medium.com/@joaoferr93" aria-label="medium">
-                <FontAwesomeIcon icon={['fab', 'medium']} size="2x" />
+                <FontAwesomeIcon icon={['fab', 'medium']} />
             </Anchor>
         </div>
         <div className={cx(styles.copyright, styles.typographySubtitle1)}>

@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +10,7 @@ const cx = classnames.bind(styles);
 
 const formatDate = date => new Date(date).toDateString();
 
-const renderCard = (_id, title, description) => (
+const renderCard = (_id, title, description, isLiked, handleLike) => (
     <>
         <div className={cx(styles.cardText, styles.typographyBody1)}>
             {description}
@@ -24,7 +25,13 @@ const renderCard = (_id, title, description) => (
                 Read more
             </Anchor>
             <div className={styles.optionsLeft}>
-                <div className={styles.heart}>
+                <div
+                    className={cx(
+                        styles.heart,
+                        isLiked ? styles.liked : styles.disliked
+                    )}
+                    onClick={handleLike}
+                >
                     <FontAwesomeIcon icon="heart" />
                 </div>
                 <div className={styles.shareAlt}>
@@ -35,39 +42,99 @@ const renderCard = (_id, title, description) => (
     </>
 );
 
-const renderCardDetail = text => (
+const renderCardDetail = (text, isLiked, handleLike) => (
     <>
         <div className={cx(styles.cardText, styles.typographyBody1)}>
             {text}
         </div>
+        <div className={styles.cardOptionsLeft}>
+
+            <div className={styles.optionsLeft}>
+                <div
+                    className={cx(
+                        styles.heart,
+                        isLiked ? styles.liked : styles.disliked
+                    )}
+                    onClick={handleLike}
+                >
+                    <FontAwesomeIcon icon="heart" />
+                </div>
+                <div className={styles.shareAlt}>
+                    <FontAwesomeIcon icon="share-alt" />
+                </div>
+            </div>
+        </div>
     </>
 );
 
-const Card = ({
-    _id,
-    title,
-    date,
-    description,
-    image,
-    author,
-    text,
-    isDetailed
-}) => (
-    <div className={styles.card}>
-        <div className={styles.cardTitle}>
-            <h5>{title}</h5>
-            <div className={cx(styles.cardBy, styles.typographySubtitle1)}>
-                by {author.email} on {formatDate(date)}
+class Card extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLiked: false
+        };
+
+        this.handleLike = this.handleLike.bind(this);
+    }
+
+    handleLike() {
+        const { _id, likePost, dislikePost } = this.props;
+        const { isLiked } = this.state;
+
+        if (isLiked) {
+            //dislikePost(_id);
+        } else {
+            //likePost(_id);
+        }
+
+        this.setState({ isLiked: !isLiked });
+    }
+
+    render() {
+        const {
+            _id,
+            title,
+            date,
+            description,
+            image,
+            author,
+            text,
+            isDetailed
+        } = this.props;
+        const { isLiked } = this.state;
+
+        return (
+            <div className={styles.card}>
+                <div className={styles.cardTitle}>
+                    <h5>{title}</h5>
+                    <div
+                        className={cx(
+                            styles.cardBy,
+                            styles.typographySubtitle1
+                        )}
+                    >
+                        by {author.email} on {formatDate(date)}
+                    </div>
+                </div>
+                <div className={styles.cardImage}>
+                    <img alt="img-card" src={image} />
+                </div>
+                {isDetailed
+                    ? renderCardDetail(text,
+                        isLiked,
+                        this.handleLike)
+                    : renderCard(
+                        _id,
+                        title,
+                        description,
+                        isLiked,
+                        this.handleLike
+                    )}
             </div>
-        </div>
-        <div className={styles.cardImage}>
-            <img alt="img-card" src={image} />
-        </div>
-        {isDetailed
-            ? renderCardDetail(text)
-            : renderCard(_id, title, description)}
-    </div>
-);
+        );
+    }
+}
 
 Card.propTypes = {
     _id: PropTypes.string.isRequired,

@@ -1,7 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router-dom';
 import styles from './styles.module.scss';
-import Anchor from '../Anchor';
 
 const cx = classnames.bind(styles);
 
@@ -10,47 +11,108 @@ const Drawer = ({ user, show, handleLogout }) => (
         <div className={styles.header}>
             <h5>Blog mern demo</h5>
         </div>
-        <div className={styles.links}>
+        <div className={cx(styles.links, styles.typographySubtitle1)}>
             <li>
                 <ul>
-                    <Anchor exact to="/" colorAnchor="blue">
-                        Home
-                    </Anchor>
+                    <NavLink
+                        exact
+                        to="/"
+                        className={styles.anchor}
+                        activeClassName={styles.selected}
+                    >
+                        <div className={styles.unselected}>
+                            <FontAwesomeIcon
+                                icon="home"
+                                className={styles.margin}
+                            />
+                            Home
+                        </div>
+                    </NavLink>
                 </ul>
                 <ul>
-                    <Anchor exact to="/contactus" colorAnchor="blue">
-                        Contact us
-                    </Anchor>
+                    <NavLink
+                        exact
+                        to="/contact-us"
+                        className={styles.anchor}
+                        activeClassName={styles.selected}
+                    >
+                        <div className={styles.unselected}>
+                            <FontAwesomeIcon
+                                icon="envelope"
+                                className={styles.margin}
+                            />{' '}
+                            Contact us
+                        </div>{' '}
+                    </NavLink>
                 </ul>
 
                 {Object.keys(user).length ? (
                     <>
                         <ul>
-                            <Anchor exact to="/create-post" colorAnchor="blue">
-                                Create post
-                            </Anchor>
+                            <NavLink
+                                exact
+                                to="/create-post"
+                                className={styles.anchor}
+                                activeClassName={styles.selected}
+                            >
+                                <div className={styles.unselected}>
+                                    <FontAwesomeIcon
+                                        icon="pen"
+                                        className={styles.margin}
+                                    />
+                                    Create post
+                                </div>
+                            </NavLink>
                         </ul>
                         <ul>
-                            <Anchor
-                                exact
-                                colorAnchor="blue"
+                            <a
+                                className={styles.anchor}
+                                activeClassName={styles.selected}
                                 onClick={handleLogout}
                             >
-                                Logout
-                            </Anchor>
+                                <div className={styles.unselected}>
+                                    <FontAwesomeIcon
+                                        icon="user-circle"
+                                        className={styles.margin}
+                                    />{' '}
+                                    Logout
+                                </div>{' '}
+                            </a>
                         </ul>
                     </>
                 ) : (
                     <>
                         <ul>
-                            <Anchor exact to="/login" colorAnchor="blue">
-                                Login
-                            </Anchor>
+                            <NavLink
+                                exact
+                                to="/login"
+                                className={styles.anchor}
+                                activeClassName={styles.selected}
+                            >
+                                <div className={styles.unselected}>
+                                    <FontAwesomeIcon
+                                        icon="user-circle"
+                                        className={styles.margin}
+                                    />{' '}
+                                    Login
+                                </div>
+                            </NavLink>
                         </ul>
                         <ul>
-                            <Anchor exact to="/register" colorAnchor="blue">
-                                Register
-                            </Anchor>
+                            <NavLink
+                                exact
+                                to="/register"
+                                className={styles.anchor}
+                                activeClassName={styles.selected}
+                            >
+                                <div className={styles.unselected}>
+                                    <FontAwesomeIcon
+                                        icon="user-circle"
+                                        className={styles.margin}
+                                    />{' '}
+                                    Register
+                                </div>
+                            </NavLink>
                         </ul>
                     </>
                 )}

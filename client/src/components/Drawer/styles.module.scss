@@ -3,20 +3,20 @@
 .drawer{
     position:fixed;
     top:0;
-    left: -85%;
-    width: 85%;
+    width: 32.0rem;
     background-color: $white;
     color: $black;
     height: 100%;
-    transition: all 0.5s ease;
     box-shadow: $box-shadow-16dp;
     z-index: 100;
-    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 300ms linear;
+    will-change: transform;
 }
 
 .drawerShow{
-    left: 0px;
-    opacity: 1;
+    transform: none;
+    transition: transform 300ms linear;
 }
 
 .header{
@@ -27,7 +27,7 @@
 
 .links{
     color: $black;
-    padding: $space-16;
+    padding: $space-12;
 
     li {
         list-style:none;
@@ -36,4 +36,39 @@
     ul {
         margin-bottom: $space-12;
     }
+}
+
+.selected{
+    div {
+        background-color: #bbdefb;
+        border-radius: $space-4;
+        color: $primary-dark;
+        padding: $space-12;
+        width: 100%;
+    }
+}
+
+.anchor{
+    text-decoration: none;
+    transition: all 1s ease-in-out;
+    color: $gray-700;
+}
+
+.unselected {
+    :hover{
+        background-color: #bbdefb;
+        border-radius: $space-4;
+        color: $primary-dark;
+        padding: $space-12;
+        width: 100%;
+    }
+}
+
+
+.unselected{
+    padding: $space-12;
+}
+
+.margin{
+    margin-right: $space-24;
 }

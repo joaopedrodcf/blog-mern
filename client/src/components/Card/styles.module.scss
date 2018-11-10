@@ -4,11 +4,11 @@
     box-shadow: $box-shadow-2dp;
     border-radius: $space-4;
     margin: $space-24 0;
-    animation: fadein 1s;
+    animation: fadein 0.250s ease-in-out;
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
+    from { opacity: 0.1; }
     to   { opacity: 1; }
 }
 
@@ -38,9 +38,18 @@
     justify-content: space-between;
     align-items: flex-end;
 }
+
+.cardOptionsLeft{
+    padding: $space-16;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
 .optionsLeft{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .cardButtons{
@@ -49,13 +58,22 @@
 }
 
 .heart{
-    color: $red;
     font-size: $typography-24;
     padding: 0 $space-12;
 }
 
 .heart:hover{
+}
+
+@keyframes heart { 0%, 17.5% { font-size: 0; } }
+
+.liked{
     color: $red;
+    animation: heart 0.250s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.disliked{
+    color: $gray-500;
 }
 
 .shareAlt{

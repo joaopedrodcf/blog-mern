@@ -64,17 +64,16 @@ const authentication = (state = [], action) => {
         case actionTypes.COMMENT_SUCCESS:
             return {
                 ...state,
-                posts: state.posts.map(
-                    post =>
-                        post._id === action.payload.postId
-                            ? {
-                                  ...post,
-                                  comments: [
-                                      ...post.comments,
-                                      action.payload.comment
-                                  ]
-                              }
-                            : post
+                posts: state.posts.map(post =>
+                    post._id === action.payload.postId
+                        ? {
+                              ...post,
+                              comments: [
+                                  ...post.comments,
+                                  action.payload.comment
+                              ]
+                          }
+                        : post
                 )
             };
         case actionTypes.COMMENT_ERROR:
@@ -86,11 +85,22 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.GET_POSTS_SUCCESS:
+        case actionTypes.GET_POSTS_SUCCESS: {
+            state.posts.map(post => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        liked: [...post.comments, action.payload.comment]
+                    };
+                }
+            });
+
             return {
                 ...state,
                 posts: action.payload.posts
             };
+        }
+
         case actionTypes.GET_POSTS_ERROR:
             return {
                 ...state
@@ -106,6 +116,27 @@ const authentication = (state = [], action) => {
                 posts: [action.payload.post, ...state.posts]
             };
         case actionTypes.CREATE_POST_ERROR:
+            return {
+                ...state
+            };
+
+        case actionTypes.LIKE_POST_START:
+            return {
+                ...state
+            };
+        case actionTypes.LIKE_POST_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.map(post =>
+                    post._id === action.payload.postId
+                        ? {
+                              ...post,
+                              likes: [...post.likes, action.payload.comment]
+                          }
+                        : post
+                )
+            };
+        case actionTypes.LIKE_POST_ERROR:
             return {
                 ...state
             };

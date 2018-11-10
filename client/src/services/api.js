@@ -7,6 +7,7 @@ const urlContact = `/api/send-email`;
 const urlGetPosts = `/api/posts`;
 const urlGetPost = `/api/post/`;
 const urlCreateComment = `/api/comment`;
+const urlLike = `/api/like`;
 
 export function loginService(email, password) {
     return axios
@@ -103,4 +104,40 @@ export function createCommentService(text, postId) {
     };
 
     return axios.post(urlCreateComment, params, config);
+}
+
+export function likePostService(postId) {
+    const params = new URLSearchParams();
+    params.append('postId', postId);
+
+    const token = localStorage.getItem('token');
+
+    const headers = {
+        'x-access-token': token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
+
+    const config = {
+        headers
+    };
+
+    return axios.post(urlLike, params, config);
+}
+
+export function dislikePostService(postId) {
+    const params = new URLSearchParams();
+    params.append('postId', postId);
+
+    const token = localStorage.getItem('token');
+
+    const headers = {
+        'x-access-token': token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
+
+    const config = {
+        headers
+    };
+
+    return axios.delete(urlLike, params, config);
 }

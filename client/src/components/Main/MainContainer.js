@@ -2,13 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Main from './Main';
-import {
-    login,
-    register,
-    createComment,
-    getPosts,
-    createPost
-} from '../../actions';
+import * as actions from '../../actions';
 
 const mapStateToProps = (
     { isAuthenticated, email, errorMessage, posts, user },
@@ -24,19 +18,25 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => ({
     login: (email, password) => {
-        dispatch(login(email, password));
+        dispatch(actions.login(email, password));
     },
     register: (email, password) => {
-        dispatch(register(email, password));
+        dispatch(actions.register(email, password));
     },
     createComment: (text, postId) => {
-        dispatch(createComment(text, postId));
+        dispatch(actions.createComment(text, postId));
     },
     getPosts: () => {
-        dispatch(getPosts());
+        dispatch(actions.getPosts());
     },
     createPost: (title, description, text, image) => {
-        dispatch(createPost(title, description, text, image));
+        dispatch(actions.createPost(title, description, text, image));
+    },
+    likePost: postId => {
+        dispatch(actions.likePost(postId));
+    },
+    dislikePost: postId => {
+        dispatch(actions.dislikePost(postId));
     }
 });
 

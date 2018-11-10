@@ -80,6 +80,10 @@ module.exports = app => {
                 path: 'comments',
                 populate: { path: 'author' }
             })
+            .populate({
+                path: 'likes',
+                populate: { path: 'author' }
+            })
             .exec((err, post) => {
                 if (err)
                     return res.status(500).send({
@@ -121,6 +125,10 @@ module.exports = app => {
             .populate('author', 'email')
             .populate({
                 path: 'comments',
+                populate: { path: 'author', select: 'email' }
+            })
+            .populate({
+                path: 'likes',
                 populate: { path: 'author', select: 'email' }
             });
 
