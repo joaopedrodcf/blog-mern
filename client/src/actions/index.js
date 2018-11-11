@@ -6,7 +6,9 @@ import {
     logoutService,
     createCommentService,
     getAllPostsService,
-    createPostService
+    createPostService,
+    createLikeService,
+    deleteLikeService,
 } from '../services/api';
 
 /*
@@ -130,6 +132,46 @@ export function createPostError(err) {
     };
 }
 
+export function createLikeStart() {
+    return {
+        type: actionTypes.CREATE_LIKE_START
+    };
+}
+
+export function createLikeSuccess(post) {
+    return {
+        type: actionTypes.CREATE_LIKE_SUCCESS,
+        payload: { post }
+    };
+}
+
+export function createLikeError(err) {
+    return {
+        type: actionTypes.CREATE_LIKE_ERROR,
+        payload: { err }
+    };
+}
+
+export function deleteLikeStart() {
+    return {
+        type: actionTypes.DELETE_LIKE_START
+    };
+}
+
+export function deleteLikeSuccess(post) {
+    return {
+        type: actionTypes.DELETE_LIKE_SUCCESS,
+        payload: { post }
+    };
+}
+
+export function deleteLikeError(err) {
+    return {
+        type: actionTypes.DELETE_LIKE_ERROR,
+        payload: { err }
+    };
+}
+
 /*
  * action creators async
  */
@@ -211,6 +253,37 @@ export function createPost(title, description, text, image) {
             },
             err => {
                 dispatch(createPostError(err));
+            }
+        );
+    };
+}
+
+export function createLike(postId) {
+    return dispatch => {
+        dispatch(createLikeStart());
+        createLikeService(postId).then(
+            response => {
+                dispatch(createLikeSuccess({
+                    id:postId,
+                    like: response.data.like._id
+                }));
+            },
+            err => {
+                dispatch(createLikeError(err));
+            }
+        );
+    };
+}
+
+export function deleteLike(postId) {
+    return dispatch => {
+        dispatch(deleteLikeStart());
+        deleteLikeService(postId).then(
+            response => {
+                dispatch(deleteLikeSuccess({ postId}));
+            },
+            err => {
+                dispatch(deleteLikeError(err));
             }
         );
     };

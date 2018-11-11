@@ -27,8 +27,8 @@
 
 .cardImage{
     img {
-        height: 32.0rem; 
-        width: 100%; 
+        height: 32.0rem;
+        width: 100%;
     }
 }
 
@@ -49,14 +49,17 @@
 }
 
 .heart{
-    color: $red;
     font-size: $typography-24;
     padding: 0 $space-12;
 }
 
-.heart:hover{
+.clicked{
     color: $red;
 }
+
+// .heart:hover{
+//     color: $red;
+// }
 
 .shareAlt{
     color: $gray-500;

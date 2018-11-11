@@ -109,6 +109,49 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
+        case actionTypes.CREATE_LIKE_START:
+            return {
+                ...state
+            };
+        case actionTypes.CREATE_LIKE_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.map(post=>{
+                    if(post._id === action.payload.post.id){
+                        return {
+                            ...post,
+                            likes: [...post.likes, action.payload.post.like]
+                        }
+                    }
+                    return post;
+                })
+            };
+        case actionTypes.CREATE_LIKE_ERROR:
+            return {
+                ...state
+            };
+        case actionTypes.DELETE_LIKE_START:
+            return {
+                ...state
+            };
+        case actionTypes.DELETE_LIKE_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.map(post=>{
+                    if(post._id === action.payload.post.postId){
+                        return {
+                            ...post,
+                            likes: []
+                        }
+                    }
+                    return post;
+                })
+            };
+        case actionTypes.DELETE_LIKE_ERROR:
+            return {
+                ...state
+            };
+
 
         default:
             return state;

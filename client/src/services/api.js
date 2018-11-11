@@ -7,6 +7,7 @@ const urlContact = `/api/send-email`;
 const urlGetPosts = `/api/posts`;
 const urlGetPost = `/api/post/`;
 const urlCreateComment = `/api/comment`;
+const urlLike = '/api/like';
 
 export function loginService(email, password) {
     return axios
@@ -44,16 +45,7 @@ export function createPostService(title, description, text, image) {
     formData.append('text', text);
     formData.append('image', image);
 
-    const token = localStorage.getItem('token');
-
-    const headers = {
-        'x-access-token': token,
-        'Content-Type': 'application/x-www-form-urlencoded'
-    };
-
-    const config = {
-        headers
-    };
+    const config = getHeaderConfig();
 
     return axios.post(urlPost, formData, config);
 }
@@ -91,6 +83,32 @@ export function createCommentService(text, postId) {
     params.append('text', text);
     params.append('postId', postId);
 
+    const config = getHeaderConfig();
+
+    return axios.post(urlCreateComment, params, config);
+}
+
+export function createLikeService(postId){
+    const params = new URLSearchParams();
+    params.append('postId', postId);
+
+    const config = getHeaderConfig();
+
+    return axios.post(urlLike, params, config);
+}
+
+export function deleteLikeService(postId){
+    const token = localStorage.getItem('token');
+
+    const headers = {
+        'x-access-token': token,
+        'Content-Type': 'application/json'
+    };
+
+    return axios.delete(urlLike, { headers, data: { postId: postId}});
+}
+
+const getHeaderConfig = ()=>{
     const token = localStorage.getItem('token');
 
     const headers = {
@@ -102,5 +120,5 @@ export function createCommentService(text, postId) {
         headers
     };
 
-    return axios.post(urlCreateComment, params, config);
+    return config;
 }

@@ -88,7 +88,6 @@ module.exports = app => {
         findUserById,
         (req, res) => {
             const { postId } = req.body;
-
             Like.findOneAndRemove({ author: req.user._id }).exec(
                 (err, like) => {
                     if (err) return res.status(400).send({ message: err });

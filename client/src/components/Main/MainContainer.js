@@ -7,7 +7,9 @@ import {
     register,
     createComment,
     getPosts,
-    createPost
+    createPost,
+    createLike,
+    deleteLike
 } from '../../actions';
 
 const mapStateToProps = (
@@ -37,6 +39,12 @@ const mapDispatchToProps = dispatch => ({
     },
     createPost: (title, description, text, image) => {
         dispatch(createPost(title, description, text, image));
+    },
+    createLike: (postId)=> {
+        dispatch(createLike(postId));
+    },
+    deleteLike: (postId) => {
+        dispatch(deleteLike(postId));
     }
 });
 
