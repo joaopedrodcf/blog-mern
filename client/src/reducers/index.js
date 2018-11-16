@@ -12,9 +12,7 @@ const authentication = (state = [], action) => {
                 user: {
                     email: action.payload.email
                 },
-                isAuthenticated: true,
-                errorMessage: 'success',
-                email: action.payload.email
+                errorMessage: 'success'
             };
         case actionTypes.LOGIN_ERROR:
             return {
@@ -32,9 +30,7 @@ const authentication = (state = [], action) => {
                 user: {
                     email: action.payload.email
                 },
-                isAuthenticated: true,
-                errorMessage: 'success',
-                email: action.payload.email
+                errorMessage: 'success'
             };
         case actionTypes.REGISTER_ERROR:
             return {
@@ -49,8 +45,7 @@ const authentication = (state = [], action) => {
         case actionTypes.LOGOUT_SUCCESS:
             return {
                 ...state,
-                user: {},
-                isAuthenticated: false
+                user: {}
             };
         case actionTypes.LOGOUT_ERROR:
             return {

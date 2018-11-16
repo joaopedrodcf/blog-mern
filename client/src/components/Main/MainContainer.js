@@ -4,12 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Main from './Main';
 import * as actions from '../../actions';
 
-const mapStateToProps = (
-    { isAuthenticated, email, errorMessage, posts, user },
-    ownProps
-) => ({
-    isAuthenticated,
-    email,
+const mapStateToProps = ({ errorMessage, posts, user }, ownProps) => ({
     errorMessage,
     ownProps,
     posts,

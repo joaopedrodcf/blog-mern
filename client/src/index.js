@@ -35,11 +35,17 @@ library.add(
     faPen
 );
 
+const savedUser = () => {
+    if (localStorage.getItem('email') === null) {
+        return {};
+    }
+
+    return { email: localStorage.getItem('email') };
+};
+
 const initialState = {
-    isAuthenticated: !!localStorage.getItem('token'),
-    email: localStorage.getItem('email'),
     posts: [],
-    user: {}
+    user: savedUser()
 };
 
 const store = createStore(
