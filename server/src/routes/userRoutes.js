@@ -62,7 +62,7 @@ module.exports = app => {
                         expiresIn: 86400 // expires in 24 hours
                     });
 
-                    return res.status(200).send({ auth: true, token });
+                    return res.status(200).send({ auth: true, token, user });
                 }
 
                 return res

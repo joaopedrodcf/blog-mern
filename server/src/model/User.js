@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    likes: [{ type: mongoose.Schema.ObjectId, ref: 'Like' }]
 });
 
 // Don't try to use arrow functions here ...

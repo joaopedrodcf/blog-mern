@@ -54,16 +54,13 @@
     color: $gray-700;
 }
 
-.unselected {
-    :hover{
-        background-color: #bbdefb;
-        border-radius: $space-4;
-        color: $primary-dark;
-        padding: $space-12;
-        width: 100%;
-    }
+.unselected:hover{
+    background-color: #bbdefb;
+    border-radius: $space-4;
+    color: $primary-dark;
+    padding: $space-12;
+    width: 100%;
 }
-
 
 .unselected{
     padding: $space-12;

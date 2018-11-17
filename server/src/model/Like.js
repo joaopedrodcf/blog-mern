@@ -4,8 +4,7 @@ const LikeSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: true,
-        unique: true
+        required: true
     }
 });
 

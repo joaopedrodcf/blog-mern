@@ -83,9 +83,9 @@ class Card extends Component {
         const { isLiked } = this.state;
 
         if (isLiked) {
-            //dislikePost(_id);
+            dislikePost(_id);
         } else {
-            //likePost(_id);
+            likePost(_id);
         }
 
         this.setState({ isLiked: !isLiked });

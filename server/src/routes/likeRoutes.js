@@ -1,9 +1,8 @@
 /* eslint-disable no-shadow */
 const Joi = require('joi');
-const { findUserById } = require('./utils');
+const { findUserById, findPostById } = require('./utils');
 const verifyToken = require('./verifyToken');
 const Like = require('../model/Like');
-const Post = require('../model/Post');
 
 const schema = Joi.object().keys({
     postId: Joi.string().required()
@@ -34,6 +33,7 @@ module.exports = app => {
         verifyToken,
         validateSchema,
         findUserById,
+        findPostById,
         (req, res) => {
             const { postId } = req.body;
 
@@ -45,36 +45,25 @@ module.exports = app => {
             like.save(err => {
                 if (err) return res.status(400).send({ message: err });
 
-                Post.findById(postId).exec((err, post) => {
-                    if (err)
-                        return res.status(500).send({
-                            message: 'There was a problem finding the post.'
-                        });
-                    if (!post)
-                        return res
-                            .status(404)
-                            .send({ message: 'No post found.' });
+                req.post.likes.push(like._id);
 
-                    post.likes.push(like._id);
+                req.post.save(err => {
+                    if (err) return res.status(400).send({ message: err });
 
-                    post.save(err => {
-                        if (err) return res.status(400).send({ message: err });
-
-                        like.populate(
-                            { path: 'author', select: 'email' },
-                            (err, like) => {
-                                if (err)
-                                    return res.status(500).send({
-                                        message: 'There was a problem.'
-                                    });
-
-                                return res.status(201).send({
-                                    message: 'Like created',
-                                    like
+                    like.populate(
+                        { path: 'author', select: 'email' },
+                        (err, like) => {
+                            if (err)
+                                return res.status(500).send({
+                                    message: 'There was a problem.'
                                 });
-                            }
-                        );
-                    });
+
+                            return res.status(201).send({
+                                message: 'Like created',
+                                like
+                            });
+                        }
+                    );
                 });
             });
         }
@@ -86,9 +75,8 @@ module.exports = app => {
         verifyToken,
         validateSchema,
         findUserById,
+        findPostById,
         (req, res) => {
-            const { postId } = req.body;
-
             Like.findOneAndRemove({ author: req.user._id }).exec(
                 (err, like) => {
                     if (err) return res.status(400).send({ message: err });
@@ -98,25 +86,13 @@ module.exports = app => {
                             .status(400)
                             .send({ message: 'Like already deleted' });
 
-                    Post.findById(postId).exec((err, post) => {
-                        if (err)
-                            return res.status(500).send({
-                                message: 'There was a problem finding the post.'
-                            });
-                        if (!post)
-                            return res
-                                .status(404)
-                                .send({ message: 'No post found.' });
+                    req.post.likes.splice(like._id);
 
-                        post.likes.splice(like._id);
+                    req.post.save(err => {
+                        if (err) return res.status(400).send({ message: err });
 
-                        post.save(err => {
-                            if (err)
-                                return res.status(400).send({ message: err });
-
-                            return res.status(200).send({
-                                message: 'Like deleted'
-                            });
+                        return res.status(200).send({
+                            message: 'Like deleted'
                         });
                     });
                 }

@@ -1,9 +1,8 @@
 /* eslint-disable no-shadow */
 const Joi = require('joi');
-const { findUserById } = require('./utils');
+const { findUserById, findPostById } = require('./utils');
 const verifyToken = require('./verifyToken');
 const Comment = require('../model/Comment');
-const Post = require('../model/Post');
 
 const schema = Joi.object().keys({
     text: Joi.string().required(),
@@ -35,6 +34,7 @@ module.exports = app => {
         verifyToken,
         validateSchema,
         findUserById,
+        findPostById,
         (req, res) => {
             const { text, postId } = req.body;
 
@@ -47,36 +47,25 @@ module.exports = app => {
             comment.save(err => {
                 if (err) return res.status(400).send({ message: err });
 
-                Post.findById(postId).exec((err, post) => {
-                    if (err)
-                        return res.status(500).send({
-                            message: 'There was a problem finding the post.'
-                        });
-                    if (!post)
-                        return res
-                            .status(404)
-                            .send({ message: 'No post found.' });
+                req.post.comments.push(comment._id);
 
-                    post.comments.push(comment._id);
+                req.post.save(err => {
+                    if (err) return res.status(400).send({ message: err });
 
-                    post.save(err => {
-                        if (err) return res.status(400).send({ message: err });
-
-                        comment.populate(
-                            { path: 'author', select: 'email' },
-                            (err, comment) => {
-                                if (err)
-                                    return res.status(500).send({
-                                        message: 'There was a problem.'
-                                    });
-
-                                return res.status(201).send({
-                                    message: 'Comment created',
-                                    comment
+                    comment.populate(
+                        { path: 'author', select: 'email' },
+                        (err, comment) => {
+                            if (err)
+                                return res.status(500).send({
+                                    message: 'There was a problem.'
                                 });
-                            }
-                        );
-                    });
+
+                            return res.status(201).send({
+                                message: 'Comment created',
+                                comment
+                            });
+                        }
+                    );
                 });
             });
         }
