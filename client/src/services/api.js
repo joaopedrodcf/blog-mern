@@ -10,15 +10,10 @@ const urlCreateComment = `/api/comment`;
 const urlLike = `/api/like`;
 
 export function loginService(email, password) {
-    return axios
-        .post(urlLogin, {
-            email,
-            password
-        })
-        .then(response => {
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('email', email);
-        });
+    return axios.post(urlLogin, {
+        email,
+        password
+    });
 }
 
 export function registerService(email, password) {

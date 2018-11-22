@@ -27,11 +27,8 @@ const mapDispatchToProps = dispatch => ({
     createPost: (title, description, text, image) => {
         dispatch(actions.createPost(title, description, text, image));
     },
-    likePost: postId => {
-        dispatch(actions.likePost(postId));
-    },
-    dislikePost: postId => {
-        dispatch(actions.dislikePost(postId));
+    likePost: (postId, isLiked) => {
+        dispatch(actions.likePost(postId, isLiked));
     }
 });
 

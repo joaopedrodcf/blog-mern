@@ -11,10 +11,10 @@ export function loginStart() {
     };
 }
 
-export function loginSuccess(email) {
+export function loginSuccess(user) {
     return {
         type: actionTypes.LOGIN_SUCCESS,
-        payload: { email }
+        payload: { user }
     };
 }
 
@@ -31,10 +31,10 @@ export function registerStart() {
     };
 }
 
-export function registerSuccess(email) {
+export function registerSuccess(user) {
     return {
         type: actionTypes.REGISTER_SUCCESS,
-        payload: { email }
+        payload: { user }
     };
 }
 
@@ -129,10 +129,10 @@ export function likePostStart() {
     };
 }
 
-export function likePostSuccess(postId) {
+export function likePostSuccess(postId, like) {
     return {
         type: actionTypes.LIKE_POST_SUCCESS,
-        payload: { postId }
+        payload: { postId, like }
     };
 }
 
@@ -149,10 +149,10 @@ export function dislikePostStart() {
     };
 }
 
-export function dislikePostSuccess(postId) {
+export function dislikePostSuccess(postId, like) {
     return {
         type: actionTypes.DISLIKE_POST_SUCCESS,
-        payload: { postId }
+        payload: { postId, like }
     };
 }
 
@@ -172,8 +172,10 @@ export function login(email, password) {
         dispatch(loginStart());
 
         services.loginService(email, password).then(
-            () => {
-                dispatch(loginSuccess(email));
+            response => {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('email', email);
+                dispatch(loginSuccess(response.data.user));
             },
             err => {
                 dispatch(loginError(err));
@@ -187,8 +189,10 @@ export function register(email, password) {
         dispatch(registerStart());
 
         services.registerService(email, password).then(
-            () => {
-                dispatch(registerSuccess(email));
+            response => {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('email', email);
+                dispatch(registerSuccess(response.data.user));
             },
             err => {
                 dispatch(registerError(err));
@@ -249,32 +253,28 @@ export function createComment(text, postId) {
     };
 }
 
-export function likePost(postId) {
+export function likePost(postId, isLiked) {
     return dispatch => {
         dispatch(likePostStart());
 
-        services.likePostService(postId).then(
-            response => {
-                dispatch(likePostSuccess(postId, response.data.like));
-            },
-            err => {
-                dispatch(likePostError(err));
-            }
-        );
-    };
-}
-
-export function dislikePost(postId) {
-    return dispatch => {
-        dispatch(dislikePostStart());
-
-        services.dislikePostService(postId).then(
-            () => {
-                dispatch(dislikePostSuccess(postId));
-            },
-            err => {
-                dispatch(dislikePostError(err));
-            }
-        );
+        if (!isLiked) {
+            services.likePostService(postId).then(
+                response => {
+                    dispatch(likePostSuccess(postId, response.data.like));
+                },
+                err => {
+                    dispatch(likePostError(err));
+                }
+            );
+        } else {
+            services.dislikePostService(postId).then(
+                () => {
+                    dispatch(dislikePostSuccess(postId));
+                },
+                err => {
+                    dispatch(dislikePostError(err));
+                }
+            );
+        }
     };
 }

@@ -10,7 +10,7 @@ const cx = classnames.bind(styles);
 
 const formatDate = date => new Date(date).toDateString();
 
-const renderCard = (_id, title, description, isLiked, handleLike) => (
+const renderCard = (_id, title, description, isLiked, likes, handleLike) => (
     <>
         <div className={cx(styles.cardText, styles.typographyBody1)}>
             {description}
@@ -33,6 +33,7 @@ const renderCard = (_id, title, description, isLiked, handleLike) => (
                     onClick={handleLike}
                 >
                     <FontAwesomeIcon icon="heart" />
+                    {likes.length}
                 </div>
                 <div className={styles.shareAlt}>
                     <FontAwesomeIcon icon="share-alt" />
@@ -42,7 +43,7 @@ const renderCard = (_id, title, description, isLiked, handleLike) => (
     </>
 );
 
-const renderCardDetail = (text, isLiked, handleLike) => (
+const renderCardDetail = (text, likes, isLiked, handleLike) => (
     <>
         <div className={cx(styles.cardText, styles.typographyBody1)}>
             {text}
@@ -58,6 +59,7 @@ const renderCardDetail = (text, isLiked, handleLike) => (
                     onClick={handleLike}
                 >
                     <FontAwesomeIcon icon="heart" />
+                    {likes.length}
                 </div>
                 <div className={styles.shareAlt}>
                     <FontAwesomeIcon icon="share-alt" />
@@ -71,24 +73,13 @@ class Card extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            isLiked: false
-        };
-
         this.handleLike = this.handleLike.bind(this);
     }
 
     handleLike() {
-        const { _id, likePost, dislikePost } = this.props;
-        const { isLiked } = this.state;
+        const { _id, likePost, isLiked } = this.props;
 
-        if (isLiked) {
-            dislikePost(_id);
-        } else {
-            likePost(_id);
-        }
-
-        this.setState({ isLiked: !isLiked });
+        likePost(_id, isLiked);
     }
 
     render() {
@@ -100,9 +91,10 @@ class Card extends Component {
             image,
             author,
             text,
-            isDetailed
+            isDetailed,
+            likes,
+            isLiked
         } = this.props;
-        const { isLiked } = this.state;
 
         return (
             <div className={styles.card}>
@@ -121,14 +113,18 @@ class Card extends Component {
                     <img alt="img-card" src={image} />
                 </div>
                 {isDetailed
-                    ? renderCardDetail(text,
+                    ? renderCardDetail(
+                        text,
+                        likes,
                         isLiked,
-                        this.handleLike)
+                        this.handleLike
+                    )
                     : renderCard(
                         _id,
                         title,
                         description,
                         isLiked,
+                        likes,
                         this.handleLike
                     )}
             </div>

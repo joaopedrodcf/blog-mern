@@ -3,6 +3,8 @@ const Joi = require('joi');
 const { findUserById, findPostById } = require('./utils');
 const verifyToken = require('./verifyToken');
 const Like = require('../model/Like');
+const User = require('../model/User');
+const Post = require('../model/Post');
 
 const schema = Joi.object().keys({
     postId: Joi.string().required()
@@ -45,26 +47,43 @@ module.exports = app => {
             like.save(err => {
                 if (err) return res.status(400).send({ message: err });
 
+                req.user.likes.push(like._id);
+
                 req.post.likes.push(like._id);
 
-                req.post.save(err => {
-                    if (err) return res.status(400).send({ message: err });
+                User.findByIdAndUpdate(
+                    req.user._id,
+                    { likes: req.user.likes },
+                    err => {
+                        if (err) return res.status(400).send({ message: err });
 
-                    like.populate(
-                        { path: 'author', select: 'email' },
-                        (err, like) => {
-                            if (err)
-                                return res.status(500).send({
-                                    message: 'There was a problem.'
-                                });
+                        Post.findByIdAndUpdate(
+                            req.post._id,
+                            { likes: req.post.likes },
+                            err => {
+                                if (err)
+                                    return res
+                                        .status(400)
+                                        .send({ message: err });
 
-                            return res.status(201).send({
-                                message: 'Like created',
-                                like
-                            });
-                        }
-                    );
-                });
+                                like.populate(
+                                    { path: 'author', select: 'email' },
+                                    (err, like) => {
+                                        if (err)
+                                            return res.status(500).send({
+                                                message: 'There was a problem.'
+                                            });
+
+                                        return res.status(201).send({
+                                            message: 'Like created',
+                                            like
+                                        });
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
             });
         }
     );
@@ -87,14 +106,29 @@ module.exports = app => {
                             .send({ message: 'Like already deleted' });
 
                     req.post.likes.splice(like._id);
+                    User.findByIdAndUpdate(
+                        req.user._id,
+                        { likes: req.user.likes },
+                        err => {
+                            if (err)
+                                return res.status(400).send({ message: err });
 
-                    req.post.save(err => {
-                        if (err) return res.status(400).send({ message: err });
+                            Post.findByIdAndUpdate(
+                                req.post._id,
+                                { likes: req.post.likes },
+                                err => {
+                                    if (err)
+                                        return res
+                                            .status(400)
+                                            .send({ message: err });
 
-                        return res.status(200).send({
-                            message: 'Like deleted'
-                        });
-                    });
+                                    return res.status(200).send({
+                                        message: 'Like deleted'
+                                    });
+                                }
+                            );
+                        }
+                    );
                 }
             );
         }

@@ -6,14 +6,15 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.LOGIN_SUCCESS:
+        case actionTypes.LOGIN_SUCCESS: {
+            const { user } = action.payload;
+
             return {
                 ...state,
-                user: {
-                    email: action.payload.email
-                },
+                user,
                 errorMessage: 'success'
             };
+        }
         case actionTypes.LOGIN_ERROR:
             return {
                 ...state,
@@ -24,14 +25,15 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.REGISTER_SUCCESS:
+        case actionTypes.REGISTER_SUCCESS: {
+            const { user } = action.payload;
+
             return {
                 ...state,
-                user: {
-                    email: action.payload.email
-                },
+                user,
                 errorMessage: 'success'
             };
+        }
         case actionTypes.REGISTER_ERROR:
             return {
                 ...state,
@@ -56,21 +58,23 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.COMMENT_SUCCESS:
+        case actionTypes.COMMENT_SUCCESS: {
+            const { postId, comment } = action.payload;
+
+            const posts = state.posts.map(post =>
+                post._id === postId
+                    ? {
+                          ...post,
+                          comments: [...post.comments, comment]
+                      }
+                    : post
+            );
+
             return {
                 ...state,
-                posts: state.posts.map(post =>
-                    post._id === action.payload.postId
-                        ? {
-                              ...post,
-                              comments: [
-                                  ...post.comments,
-                                  action.payload.comment
-                              ]
-                          }
-                        : post
-                )
+                posts
             };
+        }
         case actionTypes.COMMENT_ERROR:
             return {
                 ...state
@@ -81,14 +85,31 @@ const authentication = (state = [], action) => {
                 ...state
             };
         case actionTypes.GET_POSTS_SUCCESS: {
-            state.posts.map(post => {
-                if (post._id === action.payload.postId) {
+            const email = localStorage.getItem('email');
+
+            if (email) {
+                const posts = action.payload.posts.map(post => {
+                    const { likes } = post;
+
+                    for (let index = 0; index < likes.length; index++) {
+                        if (likes[index].author.email === email) {
+                            return {
+                                ...post,
+                                isLiked: true
+                            };
+                        }
+                    }
+
                     return {
-                        ...post,
-                        liked: [...post.comments, action.payload.comment]
+                        ...post
                     };
-                }
-            });
+                });
+
+                return {
+                    ...state,
+                    posts
+                };
+            }
 
             return {
                 ...state,
@@ -119,19 +140,61 @@ const authentication = (state = [], action) => {
             return {
                 ...state
             };
-        case actionTypes.LIKE_POST_SUCCESS:
+        case actionTypes.LIKE_POST_SUCCESS: {
+            const { postId, like } = action.payload;
+
+            const posts = state.posts.map(post =>
+                post._id === postId
+                    ? {
+                          ...post,
+                          likes: [...post.likes, like],
+                          isLiked: true
+                      }
+                    : post
+            );
+
             return {
                 ...state,
-                posts: state.posts.map(post =>
-                    post._id === action.payload.postId
-                        ? {
-                              ...post,
-                              likes: [...post.likes, action.payload.comment]
-                          }
-                        : post
-                )
+                posts
             };
+        }
+
         case actionTypes.LIKE_POST_ERROR:
+            return {
+                ...state
+            };
+
+        case actionTypes.DISLIKE_POST_SUCCESS: {
+            const { postId } = action.payload;
+            const email = localStorage.getItem('email');
+
+            const posts = action.payload.posts.map(post => {
+                const { likes } = post;
+
+                if (post._id === postId) {
+                    for (let index = 0; index < likes.length; index++) {
+                        if (likes[index].author.email === email) {
+                            return {
+                                ...post,
+                                likes: likes.splice(likes[index]),
+                                isLiked: false
+                            };
+                        }
+                    }
+                }
+
+                return {
+                    ...post
+                };
+            });
+
+            return {
+                ...state,
+                posts
+            };
+        }
+
+        case actionTypes.DISLIKE_POST_ERROR:
             return {
                 ...state
             };
