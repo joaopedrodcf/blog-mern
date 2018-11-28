@@ -17,15 +17,10 @@ export function loginService(email, password) {
 }
 
 export function registerService(email, password) {
-    return axios
-        .post(urlRegister, {
-            email,
-            password
-        })
-        .then(response => {
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('email', email);
-        });
+    return axios.post(urlRegister, {
+        email,
+        password
+    });
 }
 
 export function logoutService() {

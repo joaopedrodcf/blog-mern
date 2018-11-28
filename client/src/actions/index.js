@@ -192,7 +192,8 @@ export function register(email, password) {
             response => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('email', email);
-                dispatch(registerSuccess(response.data.user));
+                const user = { email };
+                dispatch(registerSuccess(user));
             },
             err => {
                 dispatch(registerError(err));

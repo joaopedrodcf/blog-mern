@@ -105,7 +105,12 @@ module.exports = app => {
                             .status(400)
                             .send({ message: 'Like already deleted' });
 
-                    req.post.likes.splice(like._id);
+                    console.log(req.post.likes);
+                    console.log(req.user.likes);
+                    req.post.likes.splice(req.post.likes.indexOf(like._id), 1);
+                    req.user.likes.splice(req.user.likes.indexOf(like._id), 1);
+                    console.log(req.post.likes);
+                    console.log(req.user.likes);
                     User.findByIdAndUpdate(
                         req.user._id,
                         { likes: req.user.likes },
