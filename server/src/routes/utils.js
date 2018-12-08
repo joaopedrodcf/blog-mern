@@ -29,4 +29,17 @@ const findPostById = (req, res, next) => {
     });
 };
 
-module.exports = { findUserById, findPostById };
+const findPostByIdQueryParam = (req, res, next) => {
+    Post.findById(req.query.postId).exec((err, post) => {
+        if (err)
+            return res.status(500).send({
+                message: 'There was a problem finding the post.'
+            });
+        if (!post) return res.status(404).send({ message: 'No post found.' });
+
+        req.post = post;
+        next();
+    });
+};
+
+module.exports = { findUserById, findPostById, findPostByIdQueryParam };

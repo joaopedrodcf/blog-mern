@@ -1,6 +1,10 @@
 /* eslint-disable no-shadow */
 const Joi = require('joi');
-const { findUserById, findPostById } = require('./utils');
+const {
+    findUserById,
+    findPostById,
+    findPostByIdQueryParam
+} = require('./utils');
 const verifyToken = require('./verifyToken');
 const Like = require('../model/Like');
 const User = require('../model/User');
@@ -92,9 +96,8 @@ module.exports = app => {
         '/api/like',
         validateToken,
         verifyToken,
-        validateSchema,
         findUserById,
-        findPostById,
+        findPostByIdQueryParam,
         (req, res) => {
             Like.findOneAndRemove({ author: req.user._id }).exec(
                 (err, like) => {
@@ -105,12 +108,9 @@ module.exports = app => {
                             .status(400)
                             .send({ message: 'Like already deleted' });
 
-                    console.log(req.post.likes);
-                    console.log(req.user.likes);
                     req.post.likes.splice(req.post.likes.indexOf(like._id), 1);
                     req.user.likes.splice(req.user.likes.indexOf(like._id), 1);
-                    console.log(req.post.likes);
-                    console.log(req.user.likes);
+
                     User.findByIdAndUpdate(
                         req.user._id,
                         { likes: req.user.likes },

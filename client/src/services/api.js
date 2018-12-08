@@ -115,9 +115,6 @@ export function likePostService(postId) {
 }
 
 export function dislikePostService(postId) {
-    const params = new URLSearchParams();
-    params.append('postId', postId);
-
     const token = localStorage.getItem('token');
 
     const headers = {
@@ -125,9 +122,15 @@ export function dislikePostService(postId) {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
 
-    const config = {
-        headers
+    const params = {
+        postId
     };
 
-    return axios.delete(urlLike, params, config);
+    const config = {
+        headers,
+        params
+    };
+
+    // for what im seeing this request must be done withou the body
+    return axios.delete(urlLike, config);
 }
