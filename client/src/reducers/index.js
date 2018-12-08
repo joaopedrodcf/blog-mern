@@ -168,15 +168,17 @@ const authentication = (state = [], action) => {
             const { postId } = action.payload;
             const email = localStorage.getItem('email');
 
-            const posts = action.payload.posts.map(post => {
+            const posts = state.posts.map(post => {
                 const { likes } = post;
 
                 if (post._id === postId) {
                     for (let index = 0; index < likes.length; index++) {
                         if (likes[index].author.email === email) {
+                            likes.splice(index, 1);
+
                             return {
                                 ...post,
-                                likes: likes.splice(likes[index]),
+                                likes,
                                 isLiked: false
                             };
                         }
@@ -184,7 +186,7 @@ const authentication = (state = [], action) => {
                 }
 
                 return {
-                    ...post
+                    post
                 };
             });
 
