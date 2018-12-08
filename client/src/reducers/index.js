@@ -61,14 +61,16 @@ const authentication = (state = [], action) => {
         case actionTypes.COMMENT_SUCCESS: {
             const { postId, comment } = action.payload;
 
-            const posts = state.posts.map(post =>
-                post._id === postId
-                    ? {
-                          ...post,
-                          comments: [...post.comments, comment]
-                      }
-                    : post
-            );
+            const posts = state.posts.map(post => {
+                if (post._id === postId) {
+                    return {
+                        ...post,
+                        comments: [...post.comments, comment]
+                    };
+                }
+
+                return post;
+            });
 
             return {
                 ...state,
@@ -91,7 +93,7 @@ const authentication = (state = [], action) => {
                 const posts = action.payload.posts.map(post => {
                     const { likes } = post;
 
-                    for (let index = 0; index < likes.length; index++) {
+                    for (let index = 0; index < likes.length; index += 1) {
                         if (likes[index].author.email === email) {
                             return {
                                 ...post,
@@ -143,15 +145,17 @@ const authentication = (state = [], action) => {
         case actionTypes.LIKE_POST_SUCCESS: {
             const { postId, like } = action.payload;
 
-            const posts = state.posts.map(post =>
-                post._id === postId
-                    ? {
-                          ...post,
-                          likes: [...post.likes, like],
-                          isLiked: true
-                      }
-                    : post
-            );
+            const posts = state.posts.map(post => {
+                if (post._id === postId) {
+                    return {
+                        ...post,
+                        likes: [...post.likes, like],
+                        isLiked: true
+                    };
+                }
+
+                return post;
+            });
 
             return {
                 ...state,
@@ -172,7 +176,7 @@ const authentication = (state = [], action) => {
                 const { likes } = post;
 
                 if (post._id === postId) {
-                    for (let index = 0; index < likes.length; index++) {
+                    for (let index = 0; index < likes.length; index += 1) {
                         if (likes[index].author.email === email) {
                             likes.splice(index, 1);
 
@@ -185,9 +189,7 @@ const authentication = (state = [], action) => {
                     }
                 }
 
-                return {
-                    post
-                };
+                return post;
             });
 
             return {
