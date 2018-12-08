@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../Card';
 
-const Home = ({ posts, likePost, dislikePost }) => (
+const Home = ({ posts, likePost }) => (
     <div>
         {posts.map(post => (
             <Card
@@ -11,7 +11,6 @@ const Home = ({ posts, likePost, dislikePost }) => (
                 isDetailed={false}
                 {...post}
                 likePost={likePost}
-                dislikePost={dislikePost}
             />
         ))}
     </div>
