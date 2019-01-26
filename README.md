@@ -4,7 +4,7 @@ A MERN blog hosted on heroku
 
 ## Website
 
-The website is hosted on heroku pages: [blog-mern](https://joaopedrodcf.github.io/blog-react)
+The website is hosted on heroku pages: [blog-mern](https://blog-mern-demo.herokuapp.com/)
 
 ## Functionalities
 
