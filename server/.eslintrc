@@ -3,20 +3,13 @@
         "joaopedrodcf",
         "plugin:node/recommended"
     ],
+    "plugins": [
+        "jest"
+    ],
+    "env": {
+        "jest/globals": true
+    },
     "rules": {
-        "import/order": [
-            "error",
-            {
-                "groups": [
-                    "external",
-                    "index",
-                    "sibling",
-                    "parent",
-                    "internal",
-                    "builtin"
-                ]
-            }
-        ],
         "camelcase": "off",
         "no-underscore-dangle": "off",
         "no-shadow": [

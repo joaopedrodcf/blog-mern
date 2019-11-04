@@ -10,10 +10,7 @@ const routes = require('./routes');
 
 dotenv.config();
 
-mongoose.connect(
-    db.db_dev,
-    { useNewUrlParser: true }
-);
+mongoose.connect(db.db_dev, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 const app = express();

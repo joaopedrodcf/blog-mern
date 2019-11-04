@@ -109,8 +109,8 @@ class CreatePostFormik extends Component {
                                 className={cx(
                                     styles.formGroup,
                                     touched.title &&
-                                    errors.title &&
-                                    values.title !== ''
+                                        errors.title &&
+                                        values.title !== ''
                                         ? styles.error
                                         : ''
                                 )}
@@ -152,8 +152,8 @@ class CreatePostFormik extends Component {
                                 className={cx(
                                     styles.formGroup,
                                     touched.description &&
-                                    errors.description &&
-                                    values.description !== ''
+                                        errors.description &&
+                                        values.description !== ''
                                         ? styles.error
                                         : ''
                                 )}
@@ -196,8 +196,8 @@ class CreatePostFormik extends Component {
                                 className={cx(
                                     styles.formGroup,
                                     touched.text &&
-                                    errors.text &&
-                                    values.text !== ''
+                                        errors.text &&
+                                        values.text !== ''
                                         ? styles.error
                                         : ''
                                 )}
@@ -240,8 +240,8 @@ class CreatePostFormik extends Component {
                                     styles.formGroup,
                                     styles.typographyBody2,
                                     touched.text &&
-                                    errors.text &&
-                                    values.text !== ''
+                                        errors.text &&
+                                        values.text !== ''
                                         ? styles.error
                                         : ''
                                 )}

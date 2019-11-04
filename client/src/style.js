@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const Global = styled.div`
     display: grid;
-    grid-template-columns: 3fr 10fr 3fr;
-    grid-template-rows: 64px auto 120px;
-    grid-template-areas: 'header header header' ' . main . ' 'footer footer footer';
     grid-gap: 20px;
+    grid-template-areas: 'header header header' ' . main . ' 'footer footer footer';
+    grid-template-rows: 64px auto 120px;
+    grid-template-columns: 3fr 10fr 3fr;
     height: 100%;
 
     @media (max-width: 1200px) {

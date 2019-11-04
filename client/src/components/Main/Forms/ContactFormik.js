@@ -155,8 +155,8 @@ const ContactFormik = () => (
                         className={cx(
                             styles.formGroup,
                             touched.message &&
-                            errors.message &&
-                            values.message !== ''
+                                errors.message &&
+                                values.message !== ''
                                 ? styles.error
                                 : ''
                         )}

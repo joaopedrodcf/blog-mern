@@ -102,8 +102,8 @@ const LoginFormik = ({ login }) => (
                         className={cx(
                             styles.formGroup,
                             touched.password &&
-                            errors.password &&
-                            values.password !== ''
+                                errors.password &&
+                                values.password !== ''
                                 ? styles.error
                                 : ''
                         )}
