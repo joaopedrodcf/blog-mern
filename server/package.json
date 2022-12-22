@@ -30,7 +30,7 @@
         "dotenv": "^6.2.0",
         "express": "^4.17.1",
         "joi": "^14.3.1",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "mongoose": "^5.7.7",
         "morgan": "^1.9.1",
         "morgan-body": "^2.4.8",
